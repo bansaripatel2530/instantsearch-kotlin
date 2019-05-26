@@ -16,7 +16,9 @@
         android:theme="@style/InstantSearchDemo"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".home.HomeDemo">
+        <activity
+            android:screenOrientation="landscape"
+            android:name=".kensium.KensiumActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

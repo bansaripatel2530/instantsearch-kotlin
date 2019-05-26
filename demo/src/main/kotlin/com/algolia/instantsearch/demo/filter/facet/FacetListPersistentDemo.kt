@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.include_search.*
 class FacetListPersistentDemo : AppCompatActivity() {
 
     private val color = Attribute("color")
-    private val category = Attribute("category")
+    private val category = Attribute("categoryLvl0")
     private val colors
         get() = mapOf(
             color.raw to ContextCompat.getColor(this, android.R.color.holo_red_dark),

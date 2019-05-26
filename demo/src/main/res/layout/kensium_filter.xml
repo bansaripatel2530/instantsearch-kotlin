@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text="Clear"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:text="Submit"
+        app:layout_constraintBottom_toBottomOf="@+id/guideline"
+        app:layout_constraintStart_toEndOf="@id/buttonClear"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/priceFilterList"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/priceFilterList"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.30" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/brandFilterList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/categoryFilterList"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        app:layout_constraintWidth_percent="0.25" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/categoryFilterList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/priceFilterList"
+        app:layout_constraintStart_toEndOf="@id/brandFilterList"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        app:layout_constraintWidth_percent="0.38" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

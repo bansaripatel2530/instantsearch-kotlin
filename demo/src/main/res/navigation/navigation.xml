@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation"
+    app:startDestination="@id/fragmentCategory">
+    <fragment
+        android:id="@+id/fragmentCategory"
+        android:name="com.algolia.instantsearch.demo.kensium.category.CategoryFragment"
+        android:label="FragmentCategory" >
+        <action
+            android:id="@+id/navigateToFragmentProduct"
+            app:destination="@id/fragmentProduct" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentFilter"
+        android:name="com.algolia.instantsearch.demo.kensium.filter.FilterFragment"
+        android:label="FragmentFilter" />
+    <fragment
+        android:id="@+id/fragmentProduct"
+        android:name="com.algolia.instantsearch.demo.kensium.product.ProductFragment"
+        android:label="FragmentProduct" >
+        <action
+            android:id="@+id/navigateToFragmentFilter"
+            app:destination="@id/fragmentFilter" />
+    </fragment>
+</navigation>
