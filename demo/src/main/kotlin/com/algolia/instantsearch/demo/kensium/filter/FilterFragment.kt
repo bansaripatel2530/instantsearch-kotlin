@@ -12,7 +12,7 @@ import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.demo.filter.facet.FacetListAdapter
 import com.algolia.instantsearch.demo.kensium.Kensium
 import com.algolia.instantsearch.demo.kensium.KensiumViewModel
-import com.algolia.instantsearch.helper.attribute.AttributePresenterMatcher
+import com.algolia.instantsearch.helper.attribute.AttributeMatchAndReplace
 import com.algolia.instantsearch.helper.filter.FilterPresenterImpl
 import com.algolia.instantsearch.helper.filter.facet.*
 import com.algolia.instantsearch.helper.filter.list.FilterListViewModel
@@ -26,7 +26,7 @@ import kotlinx.android.synthetic.main.kensium_filter.*
 
 class FilterFragment : Fragment() {
 
-    private val filterPresenter = FilterPresenterImpl(AttributePresenterMatcher(Kensium.price, "price"))
+    private val filterPresenter = FilterPresenterImpl(AttributeMatchAndReplace(Kensium.price, "price"))
     private val adapterBrand = FacetListAdapter()
     private val adapterCategory = FacetListAdapter()
     private val adapterPrice = FilterPriceAdapter(filterPresenter)
