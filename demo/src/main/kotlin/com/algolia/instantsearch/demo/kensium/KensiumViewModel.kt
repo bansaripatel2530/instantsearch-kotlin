@@ -51,6 +51,9 @@ class KensiumViewModel : ViewModel() {
         0 to Kensium.index,
         1 to Kensium.indexPriceAsc
     ))
+    val brandViewModel = FacetListViewModel()
+    val categoryViewModel = FacetListViewModel()
+    val priceViewModel = FilterListViewModel.Numeric()
 
     /**
      * You can pass several [FacetSortCriterion] in the [FacetListPresenter.sortBy] parameter.
@@ -98,23 +101,18 @@ class KensiumViewModel : ViewModel() {
     }
 
     private fun configureBrandFilter() {
-        val brandViewModel = FacetListViewModel()
-
         brandViewModel.connectFilterState(Kensium.brand, searcher.filterState, Kensium.groupIDBrand)
         brandViewModel.connectSearcher(Kensium.brand, searcher)
         brandViewModel.connectView(adapterBrand, presenterFacetList)
     }
 
     private fun configureCategoryLvl1Filter() {
-        val categoryViewModel = FacetListViewModel()
-
         categoryViewModel.connectFilterState(Kensium.categoryLvl1, searcher.filterState, Kensium.groupIDCategoryLvl1)
         categoryViewModel.connectSearcher(Kensium.categoryLvl1, searcher)
         categoryViewModel.connectView(adapterCategoryLvl1, presenterFacetList)
     }
 
     private fun configurePriceFilter() {
-        val priceViewModel = FilterListViewModel.Numeric()
         /**
          * Add the price facet to access FacetStats later.
          */
