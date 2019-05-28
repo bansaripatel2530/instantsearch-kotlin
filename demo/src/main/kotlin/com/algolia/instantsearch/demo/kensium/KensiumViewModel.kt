@@ -12,6 +12,7 @@ import com.algolia.instantsearch.helper.filter.facet.*
 import com.algolia.instantsearch.helper.filter.list.FilterListViewModel
 import com.algolia.instantsearch.helper.filter.list.connectFilterState
 import com.algolia.instantsearch.helper.filter.list.connectView
+import com.algolia.instantsearch.helper.index.IndexPresenter
 import com.algolia.instantsearch.helper.index.IndexSegmentViewModel
 import com.algolia.instantsearch.helper.index.connectSearcher
 import com.algolia.instantsearch.helper.searcher.SearcherForFacets
@@ -63,7 +64,7 @@ class KensiumViewModel : ViewModel() {
     /**
      * This transform an [Index] into a String for presentation purposes.
      */
-    val presenterSortBy = { index: Index ->
+    val presenterSortBy: IndexPresenter = { index: Index ->
         when (index) {
             Kensium.index -> "Normal"
             Kensium.indexPriceAsc -> "Price Asc"
