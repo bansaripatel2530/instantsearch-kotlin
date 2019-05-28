@@ -1,4 +1,5 @@
 
+import dependency.Library
 import dependency.network.Ktor
 import dependency.test.AndroidTestRunner
 import dependency.test.Espresso
@@ -60,7 +61,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":helper"))
+    implementation(Library("helper-android"))
+//    implementation(project(":helper"))
     implementation(kotlin("stdlib-jdk8"))
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.1.0-alpha04")

@@ -9,5 +9,7 @@ class ProductViewHolder(private val view: View) : RecyclerView.ViewHolder(view) 
 
     fun bind(product: Product) {
         view.selectableItemName.text = product.name
+        view.selectableItemSubtitle.text = product.price.getObject("USD").getPrimitive("default_formated").content
+        view.selectableItemSubtitle.visibility = View.VISIBLE
     }
 }

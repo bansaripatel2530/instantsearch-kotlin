@@ -16,22 +16,18 @@ import kotlinx.android.synthetic.main.kensium_category.*
 
 class CategoryFragment : Fragment() {
 
-    private val adapter = CategoryAdapter().apply {
-        onClick = { facet ->
-            val bundle =  bundleOf("categoryLvl0" to facet.value)
-
-            findNavController().navigate(R.id.navigateToFragmentProduct, bundle)
-        }
-    }
+    lateinit var viewModel: KensiumViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val shared = ViewModelProviders.of(requireActivity()).get(KensiumViewModel::class.java)
+        viewModel = ViewModelProviders.of(requireActivity()).get(KensiumViewModel::class.java)
 
-        shared.searcherForFacets.let {
-            it.response?.let { response -> adapter.submitList(response.facets) }
-            it.onResponseChanged += { response -> adapter.submitList(response.facets) }
-            it.onErrorChanged += { error -> error.printStackTrace() }
+        viewModel.adapterCategoryLvl0.apply {
+            onClick = { facet ->
+                val bundle =  bundleOf("categoryLvl0" to facet.value)
+
+                findNavController().navigate(R.id.navigateToFragmentProduct, bundle)
+            }
         }
     }
 
@@ -44,7 +40,7 @@ class CategoryFragment : Fragment() {
 
         categoryList.let {
             it.layoutManager = LinearLayoutManager(context)
-            it.adapter = adapter
+            it.adapter = viewModel.adapterCategoryLvl0
         }
     }
 }
