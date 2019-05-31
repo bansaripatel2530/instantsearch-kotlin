@@ -11,7 +11,15 @@ fun RecyclerView.Adapter<MovieViewHolder>.createMovieViewHolder(parent: ViewGrou
     return MovieViewHolder(parent.inflate(R.layout.list_item_large))
 }
 
+fun RecyclerView.Adapter<MoviewNewViewHolder>.createMovieNewViewHolder(parent: ViewGroup): MoviewNewViewHolder {
+    return MoviewNewViewHolder(parent.inflate(R.layout.list_item_large))
+}
+
 fun RecyclerView.Adapter<MovieViewHolder>.bind(holder: MovieViewHolder, item: Product?) {
+    if (item != null) holder.bind(item)
+}
+
+fun RecyclerView.Adapter<MoviewNewViewHolder>.bind(holder: MoviewNewViewHolder, item: Movie?) {
     if (item != null) holder.bind(item)
 }
 

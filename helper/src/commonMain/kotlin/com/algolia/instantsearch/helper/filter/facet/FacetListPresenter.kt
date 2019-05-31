@@ -5,7 +5,7 @@ import com.algolia.instantsearch.helper.filter.facet.FacetSortCriterion.*
 
 public class FacetListPresenter(
     val sortBy: List<FacetSortCriterion> = listOf(CountDescending),
-    val limit: Int = 5
+    val limit: Int = 10000000
 ) : (List<FacetListItem>) -> (List<FacetListItem>) {
 
     private val comparator = Comparator<FacetListItem> { (facetA, isSelectedA), (facetB, isSelectedB) ->
