@@ -19,6 +19,24 @@
         <activity
             android:screenOrientation="landscape"
             android:name=".kensium.KensiumActivity">
+
+        </activity>
+
+        <activity
+            android:name=".filter.toggle.FilterToggleDemo"
+            android:parentActivityName=".home.HomeDemo" >
+
+        </activity>
+
+        <activity
+            android:name=".filter.segment.FilterSegmentDemo"
+            android:parentActivityName=".home.HomeDemo" >
+
+        </activity>
+
+        <activity
+            android:name=".filter.list.FilterListAllDemo"
+            android:parentActivityName=".home.HomeDemo" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,18 +44,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name=".filter.toggle.FilterToggleDemo"
-            android:parentActivityName=".home.HomeDemo" />
-
-        <activity
-            android:name=".filter.segment.FilterSegmentDemo"
-            android:parentActivityName=".home.HomeDemo" />
-
-        <activity
-            android:name=".filter.list.FilterListAllDemo"
-            android:parentActivityName=".home.HomeDemo" />
 
         <activity
             android:name=".filter.list.FilterListFacetDemo"
@@ -77,11 +83,16 @@
 
         <activity
             android:name=".search.SearchAsYouTypeDemo"
-            android:parentActivityName=".home.HomeDemo" />
+            android:parentActivityName=".home.HomeDemo" >
+
+        </activity>
 
         <activity
             android:name=".list.paging.PagingSingleIndexDemo"
-            android:parentActivityName=".home.HomeDemo" />
+            android:parentActivityName=".home.HomeDemo" >
+
+
+        </activity>
 
         <activity
             android:name=".index.IndexSegmentDemo"

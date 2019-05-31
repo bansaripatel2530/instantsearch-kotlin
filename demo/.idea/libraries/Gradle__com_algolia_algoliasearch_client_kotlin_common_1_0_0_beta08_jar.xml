@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: com.algolia:algoliasearch-client-kotlin-common:1.0.0-beta08@jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.algolia/algoliasearch-client-kotlin-common/1.0.0-beta08/79bc0adbc12b5d8f51cb93b4b56e78ae465cc43d/algoliasearch-client-kotlin-common-1.0.0-beta08.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.algolia/algoliasearch-client-kotlin-common/1.0.0-beta08/4f2b4b2e51c4bada11b938396446d696786fe024/algoliasearch-client-kotlin-common-1.0.0-beta08-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

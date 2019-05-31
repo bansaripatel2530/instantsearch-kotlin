@@ -24,9 +24,17 @@ object Kensium  {
     private val applicationID = ApplicationID("HDLGLOLEHS")
     private val apiKey = APIKey("75025d6975e4c9a012de7163cde4e42d")
     private val client = ClientSearch(applicationID, apiKey, LogLevel.BODY)
-    private val indexName = IndexName("production_default_products")
+    val indexName = IndexName("production_default_products")
     private val indexNamePriceAsc = IndexName("production_default_products_price_default_asc")
-
+    private val indexNamePriceDes = IndexName("production_default_products_price_default_desc")
+    private val indexNameNewestFirst = IndexName("production_default_products_created_at_desc")
+    private val indexNameAsc = IndexName("production_default_products_name_asc")
+    private val indexNameDes = IndexName("production_default_products_name_desc")
     val index = client.initIndex(indexName)
     val indexPriceAsc = client.initIndex(indexNamePriceAsc)
+    val indexPriceDes = client.initIndex(indexNamePriceDes)
+    val indexNewestFirst = client.initIndex(indexNameNewestFirst)
+    val indexNameAscName = client.initIndex(indexNameAsc)
+    val indexNameDesName = client.initIndex(indexNameDes)
+
 }

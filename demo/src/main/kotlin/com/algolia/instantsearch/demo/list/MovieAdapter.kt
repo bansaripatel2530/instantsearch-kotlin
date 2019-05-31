@@ -11,6 +11,6 @@ class MovieAdapter : ListAdapter<Movie, MovieViewHolder>(DiffUtilMovie) {
     }
 
     override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
-        bind(holder, getItem(position))
+//        bind(holder, getItem(position))
     }
 }

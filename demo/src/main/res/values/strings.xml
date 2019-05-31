@@ -6,6 +6,7 @@
     <string name="search_demos">Search for demos</string>
     <string name="search_brands">Search for brands</string>
     <string name="search_movies">Search for movies</string>
+    <string name="product_title">"%s"</string>
     <string name="template_title">"%s (%s)"</string>
     <string name="numeric_filters">Numeric Filters</string>
     <string name="facet_filters">Facet filters</string>

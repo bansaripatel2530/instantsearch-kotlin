@@ -33,7 +33,7 @@ class PagingSingleIndexDemo : AppCompatActivity() {
         val searchBoxViewModel = SearchBoxViewModel()
         val searchBoxView = SearchBoxViewAppCompat(searchView)
 
-        movies.observe(this, Observer { hits -> adapter.submitList(hits) })
+//        movies.observe(this, Observer { hits -> adapter.submitList(hits) })
 
         searchBoxViewModel.connectView(searchBoxView)
         searchBoxViewModel.connectSearcher(searcher)

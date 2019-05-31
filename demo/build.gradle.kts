@@ -66,6 +66,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     implementation("androidx.navigation:navigation-fragment-ktx:2.1.0-alpha04")
+    implementation("androidx.navigation:navigation-ui:2.1.0-alpha04")
+
     implementation(AppCompat())
     implementation(Glide())
     implementation(ContraintLayout())

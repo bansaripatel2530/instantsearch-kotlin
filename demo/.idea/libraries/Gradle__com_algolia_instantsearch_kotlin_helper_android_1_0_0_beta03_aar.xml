@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.algolia:instantsearch-kotlin-helper-android:1.0.0-beta03@aar">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fc7d066810d5d5ca30f2808a1a96ad39/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fc7d066810d5d5ca30f2808a1a96ad39/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.algolia/instantsearch-kotlin-helper-android/1.0.0-beta03/c479869e97db6255e7e515e4db3a8d5c1aded6a6/instantsearch-kotlin-helper-android-1.0.0-beta03-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

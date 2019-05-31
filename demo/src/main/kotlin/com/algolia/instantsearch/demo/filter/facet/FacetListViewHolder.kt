@@ -14,6 +14,9 @@ class FacetListViewHolder(private val view: View) : RecyclerView.ViewHolder(view
         view.selectableItemName.text = facet.highlightedOrNull?.let {
             Html.fromHtml(it, Html.FROM_HTML_MODE_COMPACT)
         } ?: facet.value.replace("///", "->")
+
+
+
 //        view.selectableItemSubtitle.text = facet.count.toString()
 //        view.selectableItemSubtitle.visibility = View.VISIBLE
         view.selectableItemIcon.visibility = if (selected) View.VISIBLE else View.INVISIBLE

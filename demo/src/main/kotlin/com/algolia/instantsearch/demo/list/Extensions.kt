@@ -5,12 +5,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.demo.inflate
+import com.algolia.instantsearch.demo.kensium.product.Product
 
 fun RecyclerView.Adapter<MovieViewHolder>.createMovieViewHolder(parent: ViewGroup): MovieViewHolder {
     return MovieViewHolder(parent.inflate(R.layout.list_item_large))
 }
 
-fun RecyclerView.Adapter<MovieViewHolder>.bind(holder: MovieViewHolder, item: Movie?) {
+fun RecyclerView.Adapter<MovieViewHolder>.bind(holder: MovieViewHolder, item: Product?) {
     if (item != null) holder.bind(item)
 }
 
