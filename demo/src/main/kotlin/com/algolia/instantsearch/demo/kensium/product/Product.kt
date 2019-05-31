@@ -10,5 +10,7 @@ import kotlinx.serialization.json.JsonObject
 data class Product(
     val name: String,
     val price: JsonObject,
+    val thumbnail_url:String,
+    val sku:String,
     override val objectID: ObjectID
 ): Indexable

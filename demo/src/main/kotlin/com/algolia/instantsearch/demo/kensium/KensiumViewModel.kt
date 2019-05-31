@@ -9,7 +9,6 @@ import com.algolia.instantsearch.demo.filter.facet.FacetListAdapter
 import com.algolia.instantsearch.demo.kensium.category.CategoryAdapter
 import com.algolia.instantsearch.demo.kensium.filter.FilterPriceAdapter
 import com.algolia.instantsearch.demo.kensium.product.Product
-import com.algolia.instantsearch.demo.kensium.product.ProductAdapter
 import com.algolia.instantsearch.demo.list.Movie
 import com.algolia.instantsearch.demo.list.MovieAdapterPaged
 import com.algolia.instantsearch.helper.android.list.SearcherSingleIndexDataSource
