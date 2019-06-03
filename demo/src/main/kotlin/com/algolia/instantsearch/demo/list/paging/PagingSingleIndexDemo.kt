@@ -2,13 +2,11 @@ package com.algolia.instantsearch.demo.list.paging
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.algolia.instantsearch.core.searchbox.SearchBoxViewModel
 import com.algolia.instantsearch.demo.*
 import com.algolia.instantsearch.demo.list.Movie
-import com.algolia.instantsearch.demo.list.MovieAdapterPaged
 import com.algolia.instantsearch.helper.android.list.SearcherSingleIndexDataSource
 import com.algolia.instantsearch.helper.android.searchbox.SearchBoxViewAppCompat
 import com.algolia.instantsearch.helper.searchbox.connectSearcher
@@ -29,7 +27,7 @@ class PagingSingleIndexDemo : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.demo_paging)
 
-        val adapter = MovieAdapterPaged()
+//        val adapter = MovieAdapterPaged()
         val searchBoxViewModel = SearchBoxViewModel()
         val searchBoxView = SearchBoxViewAppCompat(searchView)
 
@@ -44,7 +42,7 @@ class PagingSingleIndexDemo : AppCompatActivity() {
         configureToolbar(toolbar)
         configureSearcher(searcher)
         configureSearchView(searchView, getString(R.string.search_movies))
-        configureRecyclerView(list, adapter)
+//        configureRecyclerView(list, adapter)
         onResponseChangedThenUpdateNbHits(searcher, nbHits)
     }
 

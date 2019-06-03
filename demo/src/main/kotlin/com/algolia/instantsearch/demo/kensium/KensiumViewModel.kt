@@ -1,7 +1,5 @@
 package com.algolia.instantsearch.demo.kensium
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
@@ -9,8 +7,7 @@ import com.algolia.instantsearch.demo.filter.facet.FacetListAdapter
 import com.algolia.instantsearch.demo.kensium.category.CategoryAdapter
 import com.algolia.instantsearch.demo.kensium.filter.FilterPriceAdapter
 import com.algolia.instantsearch.demo.kensium.product.Product
-import com.algolia.instantsearch.demo.list.Movie
-import com.algolia.instantsearch.demo.list.MovieAdapterPaged
+import com.algolia.instantsearch.demo.kensium.product.ProductPagedAdapter
 import com.algolia.instantsearch.helper.android.list.SearcherSingleIndexDataSource
 import com.algolia.instantsearch.helper.attribute.AttributeMatchAndReplace
 import com.algolia.instantsearch.helper.filter.FilterPresenterImpl
@@ -25,7 +22,6 @@ import com.algolia.instantsearch.helper.searcher.SearcherForFacets
 import com.algolia.instantsearch.helper.searcher.SearcherSingleIndex
 import com.algolia.instantsearch.helper.searcher.addFacet
 import com.algolia.search.client.Index
-import com.algolia.search.helper.deserialize
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.NumericOperator
 
@@ -40,14 +36,13 @@ class KensiumViewModel : ViewModel() {
     private val dataSourceFactory = SearcherSingleIndexDataSource.Factory(searcher, Product.serializer())
     private val pagedListConfig = PagedList.Config.Builder().setPageSize(10).build()
     val product = LivePagedListBuilder<Int, Product>(dataSourceFactory, pagedListConfig).build()
-    val configProduct = MutableLiveData<Boolean>()
     /**
      * This is for formatting purposes: We replace "price.USD.default" by "price" when we display our list of Filter.Numeric.
      */
     val filterNumericPresenter = FilterPresenterImpl(AttributeMatchAndReplace(Kensium.price, "price"))
 
     val adapterCategoryLvl0 = CategoryAdapter()
-    val adapterProduct = MovieAdapterPaged()
+    val adapterProduct = ProductPagedAdapter()
     val adapterBrand = FacetListAdapter()
     val adapterCategoryLvl1 = FacetListAdapter()
     val adapterPrice = FilterPriceAdapter(filterNumericPresenter)
@@ -64,6 +59,7 @@ class KensiumViewModel : ViewModel() {
             4 to Kensium.indexNameAscName,
             5 to Kensium.indexNameDesName
     ))
+
     val brandViewModel = FacetListViewModel()
     val categoryViewModel = FacetListViewModel()
     val priceViewModel = FilterListViewModel.Numeric()
@@ -98,8 +94,8 @@ class KensiumViewModel : ViewModel() {
         configurePriceFilter()
         configureBrandFilter()
         configureCategoryLvl1Filter()
-        configureProduct()
         configureIndexSortBy()
+
     }
 
     private fun configureSearcherForFacets() {
@@ -239,8 +235,6 @@ class KensiumViewModel : ViewModel() {
     }
 
     private fun configureProduct() {
-        configProduct.postValue(true)
-
 
     }
 

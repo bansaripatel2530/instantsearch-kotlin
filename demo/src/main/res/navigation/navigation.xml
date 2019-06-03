@@ -24,4 +24,5 @@
             android:id="@+id/navigateToFragmentFilter"
             app:destination="@id/fragmentFilter" />
     </fragment>
+
 </navigation>

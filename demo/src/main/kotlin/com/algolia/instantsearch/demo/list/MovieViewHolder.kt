@@ -11,13 +11,13 @@ import kotlinx.serialization.json.JsonObject
 
 class MovieViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
 
-    fun bind(product: Product) {
-        view.productTitle.text = view.resources.getString(R.string.product_title).format(product.name)
-        view.productPrice.text = (product.price.get("USD") as JsonObject)["default_formated"].toString().replace("\"","")
-        Glide.with(view)
-            .load("http:${product.thumbnail_url}").placeholder(android.R.drawable.ic_media_play)
-            .centerCrop()
-            .into(view.productImage)
+    fun bind(product: Movie) {
+//        view.productTitle.text = view.resources.getString(R.string.product_title).format(product.name)
+//        view.productPrice.text = (product.price.get("USD") as JsonObject)["default_formated"].toString().replace("\"","")
+//        Glide.with(view)
+//            .load("http:${product.thumbnail_url}").placeholder(android.R.drawable.ic_media_play)
+//            .centerCrop()
+//            .into(view.productImage)
     }
 
 

@@ -95,7 +95,7 @@ fun AppCompatActivity.configureTitle(textView: TextView, text: String, color: In
 }
 
 fun AppCompatActivity.configureSearcher(searcher: SearcherSingleIndex) {
-    searcher.index = client.initIndex(intent.indexName)
+    searcher.index = client.initIndex(searcher.index.indexName)
 }
 
 fun AppCompatActivity.configureSearcher(searcher: SearcherForFacets) {

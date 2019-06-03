@@ -6,20 +6,21 @@ import androidx.recyclerview.widget.RecyclerView
 import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.demo.inflate
 import com.algolia.instantsearch.demo.kensium.product.Product
+import com.algolia.instantsearch.demo.kensium.product.ProductViewHolder
 
-fun RecyclerView.Adapter<MovieViewHolder>.createMovieViewHolder(parent: ViewGroup): MovieViewHolder {
-    return MovieViewHolder(parent.inflate(R.layout.list_item_large))
+fun RecyclerView.Adapter<ProductViewHolder>.createProductViewHolder(parent: ViewGroup): ProductViewHolder {
+    return ProductViewHolder(parent.inflate(R.layout.list_item_large))
 }
 
 fun RecyclerView.Adapter<MoviewNewViewHolder>.createMovieNewViewHolder(parent: ViewGroup): MoviewNewViewHolder {
     return MoviewNewViewHolder(parent.inflate(R.layout.list_item_large))
 }
 
-fun RecyclerView.Adapter<MovieViewHolder>.bind(holder: MovieViewHolder, item: Product?) {
+fun RecyclerView.Adapter<MovieViewHolder>.bind(holder: MoviewNewViewHolder, item: Movie?) {
     if (item != null) holder.bind(item)
 }
 
-fun RecyclerView.Adapter<MoviewNewViewHolder>.bind(holder: MoviewNewViewHolder, item: Movie?) {
+fun RecyclerView.Adapter<ProductViewHolder>.bind(holder: ProductViewHolder, item: Product?) {
     if (item != null) holder.bind(item)
 }
 
