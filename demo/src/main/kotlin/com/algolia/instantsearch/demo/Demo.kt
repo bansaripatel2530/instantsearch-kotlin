@@ -1,6 +1,7 @@
 package com.algolia.instantsearch.demo
 
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -12,13 +13,16 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
-import androidx.core.text.bold
-import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.algolia.instantsearch.core.searchbox.SearchBoxViewModel
 import com.algolia.instantsearch.helper.android.highlight
+import com.algolia.instantsearch.helper.android.searchbox.SearchBoxViewAppCompat
 import com.algolia.instantsearch.helper.filter.state.FilterState
 import com.algolia.instantsearch.helper.filter.state.toFilterGroups
+import com.algolia.instantsearch.helper.searchbox.connectSearcher
+import com.algolia.instantsearch.helper.searchbox.connectView
+import com.algolia.instantsearch.helper.searcher.Searcher
 import com.algolia.instantsearch.helper.searcher.SearcherForFacets
 import com.algolia.instantsearch.helper.searcher.SearcherSingleIndex
 import com.algolia.search.client.ClientSearch
@@ -32,11 +36,11 @@ import io.ktor.client.features.logging.LogLevel
 
 
 val client = ClientSearch(
-    ConfigurationSearch(
-        ApplicationID("latency"),
-        APIKey("1f6fd3a6fb973cb08419fe7d288fa4db"),
-        logLevel = LogLevel.NONE
-    )
+        ConfigurationSearch(
+                ApplicationID("latency"),
+                APIKey("1f6fd3a6fb973cb08419fe7d288fa4db"),
+                logLevel = LogLevel.NONE
+        )
 )
 
 val stubIndex = client.initIndex(IndexName("stub"))
@@ -51,51 +55,75 @@ fun AppCompatActivity.configureToolbar(toolbar: Toolbar) {
 }
 
 fun AppCompatActivity.onFilterChangedThenUpdateFiltersText(
-    filterState: FilterState,
-    colors: Map<String, Int>,
-    filtersTextView: TextView
+        filterState: FilterState,
+        filtersTextView: Map<String, Int>,
+        vararg attributes: TextView
 ) {
-    filtersTextView.text = filterState.toFilterGroups().highlight(colors = colors)
-    filterState.onChanged += {
-        filtersTextView.text = it.toFilterGroups().highlight(colors = colors)
-    }
+//    val colors = attributes.mapIndexed { index, attribute ->
+//        attribute.raw to when (index) {
+//            0 -> ContextCompat.getColor(this, android.R.color.holo_red_dark)
+//            1 -> ContextCompat.getColor(this, android.R.color.holo_blue_dark)
+//            2 -> ContextCompat.getColor(this, android.R.color.holo_green_dark)
+//            3 -> ContextCompat.getColor(this, android.R.color.holo_purple)
+//            else -> Color.BLACK
+//        }
+//    }.toMap()
+//    filtersTextView.text = filterState.toFilterGroups().highlight(colors = colors)
+//    filterState.onChanged += {
+//        filtersTextView.text = it.toFilterGroups().highlight(colors = colors)
+//    }
 }
 
-fun AppCompatActivity.onClearAllThenClearFilters(filterState: FilterState, filtersClearAll: View) {
-    filtersClearAll.setOnClickListener {
-        filterState.notify { clear() }
-    }
+fun AppCompatActivity.onClearAllThenClearFilters(
+        filterState: FilterState,
+        filtersClearAll: View
+) {
+//    val viewModel = FilterClearViewModel()
+//
+//    viewModel.connectView(FilterClearViewImpl(filtersClearAll))
+//    viewModel.connectFilterState(filterState)
 }
 
-fun AppCompatActivity.onErrorThenUpdateFiltersText(searcher: SearcherSingleIndex, filtersTextView: TextView) {
+fun AppCompatActivity.onErrorThenUpdateFiltersText(
+        searcher: SearcherSingleIndex,
+        filtersTextView: TextView
+) {
     searcher.onErrorChanged += {
         filtersTextView.text = it.localizedMessage
     }
 }
 
 fun AppCompatActivity.onResponseChangedThenUpdateNbHits(
-    searcher: SearcherSingleIndex,
-    nbHitsView: TextView
+        searcher: SearcherSingleIndex,
+        nbHitsView: TextView
 ) {
-    searcher.onResponseChanged += {
-        nbHitsView.text = buildSpannedString {
-            bold { append(it.nbHits.toString()) }
-            append(" ")
-            append(getString(R.string.hits))
-        }
-    }
+//    val viewModel = StatsViewModel()
+//    val view = StatsTextViewSpanned(nbHitsView)
+//    val presenter: StatsPresenter<SpannedString> = { response ->
+//        buildSpannedString {
+//            if (response != null) {
+//                bold { append(response.nbHits.toString()) }
+//                append(" ${getString(R.string.hits)}")
+//            }
+//        }
+//    }
+
+//    viewModel.connectSearcher(searcher)
+//    viewModel.connectView(view, presenter)
 }
 
-fun AppCompatActivity.configureTitle(textView: TextView, text: String, color: Int) {
+fun AppCompatActivity.configureTitle(
+        textView: TextView,
+        text: String
+) {
     textView.let {
         it.text = text
-        it.setTextColor(color)
         it.visibility = View.VISIBLE
     }
 }
 
 fun AppCompatActivity.configureSearcher(searcher: SearcherSingleIndex) {
-    searcher.index = client.initIndex(searcher.index.indexName)
+    searcher.index = client.initIndex(intent.indexName)
 }
 
 fun AppCompatActivity.configureSearcher(searcher: SearcherForFacets) {
@@ -103,8 +131,8 @@ fun AppCompatActivity.configureSearcher(searcher: SearcherForFacets) {
 }
 
 fun AppCompatActivity.configureRecyclerView(
-    recyclerView: RecyclerView,
-    adapter: RecyclerView.Adapter<*>
+        recyclerView: RecyclerView,
+        adapter: RecyclerView.Adapter<*>
 ) {
     recyclerView.let {
         it.visibility = View.VISIBLE
@@ -123,9 +151,20 @@ fun AppCompatActivity.configureRecyclerView(
 
 val Intent.indexName: IndexName get() = IndexName(extras!!.getString(KeyIndexName)!!)
 
+fun AppCompatActivity.configureSearchBox(
+        searchView: SearchView,
+        searcher: Searcher
+) {
+    val searchBoxViewModel = SearchBoxViewModel()
+    val searchBoxView = SearchBoxViewAppCompat(searchView)
+
+    searchBoxViewModel.connectView(searchBoxView)
+    searchBoxViewModel.connectSearcher(searcher)
+}
+
 fun AppCompatActivity.configureSearchView(
-    searchView: SearchView,
-    queryHint: String
+        searchView: SearchView,
+        queryHint: String
 ) {
     searchView.also {
         val hintIcon = ContextCompat.getDrawable(this, R.drawable.ic_search_hint)!!
@@ -139,7 +178,11 @@ fun AppCompatActivity.configureSearchView(
     }
 }
 
-fun SearchView.showQueryHintIcon(showIconHint: Boolean, hintIcon: Drawable, hintText: String? = null) {
+fun SearchView.showQueryHintIcon(
+        showIconHint: Boolean,
+        hintIcon: Drawable,
+        hintText: String? = null
+) {
     queryHint = if (!showIconHint) {
         hintText
     } else {

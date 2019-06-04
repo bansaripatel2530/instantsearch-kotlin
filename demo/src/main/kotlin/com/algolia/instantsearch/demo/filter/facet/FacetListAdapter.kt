@@ -28,23 +28,7 @@ class FacetListAdapter :
     }
 
     override fun setSelectableItems(selectableItems: List<FacetListItem>) {
-        val list = arrayListOf<FacetListItem>()
-        if(selectableItems.isNotEmpty()){
-            if(selectableItems[0].first.value.contains("///")){
-                for (item in selectableItems){
-                    if(item.first.value.split("///")[0].trim() != "Brands"){
-                        list.add(item)
-                    }
-                }
-                submitList(list)
-
-
-            }else{
-                submitList(selectableItems)
-            }
-        }else{
-            submitList(selectableItems)
-        }
+        submitList(selectableItems)
     }
 
     companion object {

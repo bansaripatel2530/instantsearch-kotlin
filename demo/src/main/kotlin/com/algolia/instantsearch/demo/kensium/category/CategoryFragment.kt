@@ -33,20 +33,20 @@ class CategoryFragment : Fragment() {
                 findNavController().navigate(R.id.navigateToFragmentProduct, bundle)
             }
         }
+
+
+
         activity?.searchView?.setOnQueryTextListener(object :SearchView.OnQueryTextListener, androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
-
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                if(newText!!.isNotEmpty()){
-                    if(!isChange){
-                        isChange = true
-                        findNavController().navigate(R.id.navigateToFragmentProduct)
-                    }
+                if(isVisible && !newText.isNullOrEmpty()){
+                    findNavController().navigate(R.id.navigateToFragmentProduct)
                 }
-                return true
+                return false
+
             }
 
         })
