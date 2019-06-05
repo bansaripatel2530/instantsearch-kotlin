@@ -16,36 +16,36 @@ import kotlinx.android.synthetic.main.kensium_activity.*
 class KensiumActivity : AppCompatActivity() {
 
 
-    companion object{
+
         var searchBoxViewModel : SearchBoxViewModel?=null
         var searchBoxView:SearchBoxViewAppCompat ?= null
         var viewModel: KensiumViewModel? = null
 
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.kensium_activity)
         viewModel = ViewModelProviders.of(this).get(KensiumViewModel::class.java)
-
+//
 //        searchBoxViewModel = SearchBoxViewModel()
 //        searchBoxView = SearchBoxViewAppCompat(searchView)
 //        searchBoxViewModel!!.connectView(searchBoxView!!)
 //        searchBoxViewModel!!.connectSearcher(viewModel!!.searcher)
-//
+
 ////
 //        configureToolbar(toolbar)
 //        configureSearcher(viewModel!!.searcher)
 //        configureSearchView(searchView, getString(R.string.search_movies))
 //        viewModel!!.searcher.search()
 
-        configureSearchView(searchView, getString(R.string.search_demos))
-        configureSearchBox(searchView, viewModel!!.searcher)
-        viewModel!!.searcher.search()
+//        configureSearchView(searchView, getString(R.string.search_demos))
+//        configureSearchBox(searchView, viewModel!!.searcher)
+//        viewModel!!.searcher.search()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewModel!!.searcher.cancel()
 
+
+    override fun onPause() {
+        super.onPause()
     }
 }

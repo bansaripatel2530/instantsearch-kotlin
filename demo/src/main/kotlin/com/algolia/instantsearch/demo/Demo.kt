@@ -39,10 +39,11 @@ val client = ClientSearch(
         ConfigurationSearch(
                 ApplicationID("latency"),
                 APIKey("1f6fd3a6fb973cb08419fe7d288fa4db"),
-                logLevel = LogLevel.NONE
+                writeTimeout = 60000,
+                readTimeout = 60000,
+                logLevel = LogLevel.ALL
         )
 )
-
 val stubIndex = client.initIndex(IndexName("stub"))
 
 fun AppCompatActivity.configureToolbar(toolbar: Toolbar) {
