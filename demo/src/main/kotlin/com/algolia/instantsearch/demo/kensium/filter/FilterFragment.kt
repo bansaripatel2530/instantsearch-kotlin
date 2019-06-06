@@ -58,7 +58,7 @@ class FilterFragment : Fragment() {
             }
         }
         buttonSubmit.setOnClickListener {
-            viewModel.product.value?.dataSource?.invalidate()
+            viewModel.products.value?.dataSource?.invalidate()
             findNavController().popBackStack()
         }
     }

@@ -35,7 +35,7 @@ class KensiumViewModel : ViewModel() {
     val searcherForFacets = SearcherForFacets(Kensium.index, Kensium.categoryLvl0)
     private val dataSourceFactory = SearcherSingleIndexDataSource.Factory(searcher, Product.serializer())
     private val pagedListConfig = PagedList.Config.Builder().setPageSize(10).build()
-    val product = LivePagedListBuilder<Int, Product>(dataSourceFactory, pagedListConfig).build()
+    val products = LivePagedListBuilder<Int, Product>(dataSourceFactory, pagedListConfig).build()
     /**
      * This is for formatting purposes: We replace "price.USD.default" by "price" when we display our list of Filter.Numeric.
      */
@@ -95,7 +95,6 @@ class KensiumViewModel : ViewModel() {
         configureBrandFilter()
         configureCategoryLvl1Filter()
         configureIndexSortBy()
-
     }
 
     private fun configureSearcherForFacets() {

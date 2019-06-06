@@ -19,6 +19,9 @@ import com.algolia.instantsearch.helper.android.selectable.SelectableSegmentView
 import com.algolia.instantsearch.helper.index.connectView
 import com.algolia.search.model.filter.Filter
 import kotlinx.android.synthetic.main.kensium_product.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 //class ProductFragment : Fragment() {
@@ -119,19 +122,22 @@ class ProductFragment : Fragment() {
         }
         viewModel?.searcher?.onResponseChanged?.plusAssign({
             Log.e("TAG","onResponseChanged")
-            viewModel?.product?.value?.dataSource?.invalidate()
+            viewModel?.products?.value?.dataSource?.invalidate()
         })
         viewModel?.indexSegmentViewModel?.onSelectedComputed?.plusAssign {
             if(check++ > 1 ){
                 Log.e("TAG","onSelectedComputed")
-                viewModel?.product?.value?.dataSource?.invalidate()
+                viewModel?.products?.value?.dataSource?.invalidate()
             }
 
         }
-        viewModel?.product?.observe(activity!!, Observer {
-            Log.e("TAG","before-->product")
-            viewModel?.adapterProduct?.submitList(it)
-            Log.e("TAG","after-->product")
+
+        viewModel?.products?.observe(activity!!, Observer {
+            if(isVisible){
+                Log.e("TAG","before-->product")
+                viewModel?.adapterProduct?.submitList(it)
+                Log.e("TAG","after-->product")
+            }
 
         })
     }
