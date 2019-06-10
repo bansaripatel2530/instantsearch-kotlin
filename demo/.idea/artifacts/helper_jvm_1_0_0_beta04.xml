@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="helper-jvm-1.0.0-beta04">
+    <output-path>$PROJECT_DIR$/../helper/build/libs</output-path>
+    <root id="archive" name="helper-jvm-1.0.0-beta04.jar">
+      <element id="module-output" name="helper_jvmMain" />
+    </root>
+  </artifact>
+</component>

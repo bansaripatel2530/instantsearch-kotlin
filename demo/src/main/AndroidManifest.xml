@@ -16,12 +16,12 @@
         android:theme="@style/InstantSearchDemo"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".home.HomeDemo">
+        <!--<activity android:name=".home.HomeDemo">-->
 
-        </activity>
+        <!--</activity>-->
 
         <activity
-            android:screenOrientation="portrait"
+            android:screenOrientation="landscape"
             android:name=".kensium.KensiumActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,81 +31,81 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".filter.toggle.FilterToggleDemo"
-            android:parentActivityName=".home.HomeDemo" >
+        <!--<activity-->
+            <!--android:name=".filter.toggle.FilterToggleDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" >-->
 
-        </activity>
+        <!--</activity>-->
 
-        <activity
-            android:name=".filter.segment.FilterSegmentDemo"
-            android:parentActivityName=".home.HomeDemo" >
+        <!--<activity-->
+            <!--android:name=".filter.segment.FilterSegmentDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" >-->
 
-        </activity>
+        <!--</activity>-->
 
-        <activity
-            android:name=".filter.list.FilterListAllDemo"
-            android:parentActivityName=".home.HomeDemo" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <!--<activity-->
+            <!--android:name=".filter.list.FilterListAllDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" >-->
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+                <!--<category android:name="android.intent.category.DEFAULT" />-->
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        <!--</activity>-->
 
-        <activity
-            android:name=".filter.list.FilterListFacetDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".filter.list.FilterListFacetDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".filter.list.FilterListNumericDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".filter.list.FilterListNumericDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".filter.list.FilterListTagDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".filter.list.FilterListTagDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".filter.toggle.FilterToggleDefaultDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".filter.toggle.FilterToggleDefaultDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".filter.facet.FacetListDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".filter.facet.FacetListDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".filter.facet.FacetListSearchDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".filter.facet.FacetListSearchDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".filter.facet.FacetListPersistentDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".filter.facet.FacetListPersistentDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".filter.numeric.comparison.FilterComparisonDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".filter.numeric.comparison.FilterComparisonDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".search.SearchOnSubmitDemo"
-            android:parentActivityName=".home.HomeDemo" />
+        <!--<activity-->
+            <!--android:name=".search.SearchOnSubmitDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" />-->
 
-        <activity
-            android:name=".search.SearchAsYouTypeDemo"
-            android:parentActivityName=".home.HomeDemo" >
+        <!--<activity-->
+            <!--android:name=".search.SearchAsYouTypeDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" >-->
 
-        </activity>
+        <!--</activity>-->
 
-        <activity
-            android:name=".list.paging.PagingSingleIndexDemo"
-            android:parentActivityName=".home.HomeDemo" >
+        <!--<activity-->
+            <!--android:name=".list.paging.PagingSingleIndexDemo"-->
+            <!--android:parentActivityName=".home.HomeDemo" >-->
 
 
-        </activity>
+        <!--</activity>-->
 
-        <activity
-            android:name=".index.IndexSegmentDemo"
-            android:parentActivityName=".index.IndexSegmentDemo" />
+        <!--<activity-->
+            <!--android:name=".index.IndexSegmentDemo"-->
+            <!--android:parentActivityName=".index.IndexSegmentDemo" />-->
 
     </application>
 

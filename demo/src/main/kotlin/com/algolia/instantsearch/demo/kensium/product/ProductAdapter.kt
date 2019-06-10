@@ -8,16 +8,16 @@ import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.demo.inflate
 
 
-class ProductAdapter : ListAdapter<Product, ProductViewHolder>(diffUtil) {
+class ProductAdapter : PagedListAdapter<Product, ProductViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        return ProductViewHolder(parent.inflate(R.layout.list_item_selectable))
+        return ProductViewHolder(parent.inflate(R.layout.list_item_large))
     }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product = getItem(position)
 
-        holder.bind(product)
+        if (product != null) holder.bind(product)
     }
 
     companion object {

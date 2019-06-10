@@ -15,6 +15,9 @@ import com.algolia.search.model.filter.Filter
 class FilterPriceAdapter(val presenter: FilterPresenter) :
     ListAdapter<SelectableItem<Filter.Numeric>, FilterPriceViewHolder>(DiffUtilItem()),
     FilterListView<Filter.Numeric> {
+    override fun setItem(items: List<SelectableItem<Filter.Numeric>>) {
+        submitList(items)
+    }
 
     override var onClick: ((Filter.Numeric) -> Unit)? = null
 
@@ -28,9 +31,7 @@ class FilterPriceAdapter(val presenter: FilterPresenter) :
         holder.bind(presenter(filter), selected, View.OnClickListener { onClick?.invoke(filter) })
     }
 
-    override fun setSelectableItems(selectableItems: List<SelectableItem<Filter.Numeric>>) {
-        submitList(selectableItems)
-    }
+
 
     private class DiffUtilItem: DiffUtil.ItemCallback<SelectableItem<Filter.Numeric>>() {
 

@@ -51,7 +51,7 @@ class FilterFragment : Fragment() {
              * This will clear only price, brand and categoryLvl0.
              * It will not clear categoryLvl0.
              */
-            shared.searcher.filterState.notify {
+            shared.filterState.notify {
                 clear(Kensium.groupIDCategoryLvl1)
                 clear(Kensium.groupIDPrice)
                 clear(Kensium.groupIDBrand)

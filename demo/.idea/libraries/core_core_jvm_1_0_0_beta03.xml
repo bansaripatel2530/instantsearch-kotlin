@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="core.core-jvm-1.0.0-beta03">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../core/build/libs/core-jvm-1.0.0-beta03.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
