@@ -19,7 +19,12 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="navigateToFragmentProduct">
+                            <entry key="action_fragmentCategory_to_fragmentProduct">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_fragmentCategory_to_subCategoryFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -53,6 +58,27 @@
                         <option name="myPositions">
                           <map>
                             <entry key="navigateToFragmentFilter">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="subCategoryFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="12" />
+                            <option name="y" value="358" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_subCategoryFragment_to_fragmentProduct">
                               <value>
                                 <LayoutPositions />
                               </value>

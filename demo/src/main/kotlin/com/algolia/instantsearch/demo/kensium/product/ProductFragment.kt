@@ -14,7 +14,6 @@ import com.algolia.instantsearch.demo.kensium.Kensium
 import com.algolia.instantsearch.demo.kensium.KensiumActivity
 import com.algolia.instantsearch.demo.kensium.KensiumViewModel
 import com.algolia.instantsearch.helper.android.index.IndexSegmentViewSpinner
-import com.algolia.instantsearch.helper.android.searchbox.SearchBoxViewAppCompat
 import com.algolia.instantsearch.helper.index.connectView
 import com.algolia.search.model.filter.Filter
 import kotlinx.android.synthetic.main.kensium_activity.*
@@ -31,10 +30,12 @@ class ProductFragment : Fragment() {
 
         if (arguments  != null) {
             val category = arguments!!.getString("categoryLvl0")!!
-            val filter = Filter.Facet(Kensium.categoryLvl0, category)
+//            val filter = Filter.Facet(Kensium.categoryLvl0, category)
+            val filter1 = Filter.Facet(Kensium.categoryLvl0,category)
             viewModel.filterState.notify {
                 clear()
-                add(Kensium.groupIDCategoryLvl0, filter)
+//                add(Kensium.groupIDCategoryLvl0, filter)
+                add(Kensium.groupIDCategoryLvl0,filter1)
             }
         }
 
@@ -53,7 +54,6 @@ class ProductFragment : Fragment() {
         val sortByView = IndexSegmentViewSpinner(spinner, adapterSortBy)
 
         viewModel.indexSegmentViewModel.connectView(sortByView, viewModel.presenterSortBy)
-        viewModel.searchBoxViewModel.connectView(SearchBoxViewAppCompat(activity?.searchView!!))
         productList.let {
             it.adapter = viewModel.adapterProduct
             it.itemAnimator = null

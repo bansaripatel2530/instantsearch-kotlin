@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +15,7 @@ import com.algolia.instantsearch.core.searchbox.connectView
 import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.demo.kensium.KensiumActivity
 import com.algolia.instantsearch.demo.kensium.KensiumViewModel
+import com.algolia.instantsearch.demo.util.DialogUtils
 import com.algolia.instantsearch.helper.android.searchbox.SearchBoxViewAppCompat
 import com.algolia.instantsearch.helper.android.searchbox.connectSearcher
 import kotlinx.android.synthetic.main.include_search.*
@@ -30,29 +32,16 @@ class CategoryFragment : Fragment() {
         viewModel = (activity as KensiumActivity).viewModel
         viewModel?.adapterCategoryLvl0?.apply {
             onClick = { facet ->
-                val  bundle =  bundleOf("categoryLvl0" to facet.value)
-
-                findNavController().navigate(R.id.navigateToFragmentProduct, bundle)
+                val  bundle =  bundleOf("categoryLvl0" to "Shampoo")
+                findNavController().navigate(R.id.action_fragmentCategory_to_subCategoryFragment, bundle)
             }
         }
 
+        viewModel?.showErrorDialog?.observe(this, Observer {
+            DialogUtils.dialog(activity!!,it)
+        })
 
 
-//        activity?.searchView?.setOnQueryTextListener(object :SearchView.OnQueryTextListener, androidx.appcompat.widget.SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return true
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                if(isVisible && !newText.isNullOrEmpty()){
-//                    val bundle =  bundleOf("query" to newText.toString())
-//                    findNavController().navigate(R.id.navigateToFragmentProduct,bundle)
-//                }
-//                return false
-//
-//            }
-//
-//        })
 
     }
 
