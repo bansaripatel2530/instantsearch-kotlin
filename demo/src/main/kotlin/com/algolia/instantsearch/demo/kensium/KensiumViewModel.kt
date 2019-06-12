@@ -27,6 +27,7 @@ import com.algolia.instantsearch.helper.searcher.SearcherSingleIndex
 import com.algolia.instantsearch.helper.searcher.addFacet
 import com.algolia.instantsearch.helper.searcher.connectFilterState
 import com.algolia.search.client.Index
+import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.NumericOperator
 
@@ -35,9 +36,13 @@ import com.algolia.search.model.filter.NumericOperator
  * This class will be shared with all fragments from the same activity.
  */
 class KensiumViewModel : ViewModel() {
-     val showErrorDialog = MutableLiveData<String>()
+
+    val showErrorDialog = MutableLiveData<String>()
     val filterState = FilterState()
     private var isClear = false
+    val brandCount = MutableLiveData<Int>()
+    val cateCount = MutableLiveData<Int>()
+    val priceCount = MutableLiveData<Int>()
     val searcher = SearcherSingleIndex(Kensium.index).apply {
         connectFilterState(filterState)
     }
@@ -75,7 +80,6 @@ class KensiumViewModel : ViewModel() {
     ))
     val brandViewModel = FacetListViewModel()
     val categoryViewModel = FacetListViewModel()
-    val subCategoryViewModel = FacetListViewModel()
     val priceViewModel = FilterListViewModel.Numeric()
     val searchBoxViewModel = SearchBoxViewModel()
 
@@ -84,8 +88,7 @@ class KensiumViewModel : ViewModel() {
      * Each of them will be applied. The order in which each of them is passed determines the priority of each sorting criteria.
      */
     val presenterFacetList = FacetListPresenterImpl(listOf(
-                    FacetSortCriterion.IsRefined,
-                    FacetSortCriterion.AlphabeticalDescending),1000000
+            FacetSortCriterion.AlphabeticalDescending), 1000000
     )
 
     /**
@@ -102,6 +105,7 @@ class KensiumViewModel : ViewModel() {
             else -> "Default"
         }
     }
+
     init {
         configureSearcherForFacets()
         configureSearcher()
@@ -140,12 +144,6 @@ class KensiumViewModel : ViewModel() {
         categoryViewModel.connectView(adapterCategoryLvl1, presenterFacetList)
     }
 
-//    private fun configureSubCategoryLvl1Filter() {
-//        subCategoryViewModel.connectFilterState(Kensium.categoryLvl1, filterState, Kensium.groupIDCategoryLvl1)
-//        subCategoryViewModel.connectSearcher(Kensium.categoryLvl1, searcher)
-//        subCategoryViewModel.connectView(adapterCategoryLvl2, presenterFacetList)
-//    }
-
 
     private fun configurePriceFilter() {
         /**
@@ -158,28 +156,55 @@ class KensiumViewModel : ViewModel() {
             /**
              * Here, use the facetStats to do dynamic computation of the price filters.
              */
-            if(response.hitsOrNull?.isNotEmpty()!!){
+
+
+
+
+
+            if (response.hitsOrNull?.isNotEmpty()!!) {
+
+
+
+
+
                 val facetStatsPrice = response.facetStats[Kensium.price]
-                if(filterState.getNumericFilters(Kensium.groupIDPrice).isEmpty()){
+                if (filterState.getNumericFilters(Kensium.groupIDPrice).isEmpty()) {
                     isClear = true
-                    setDropDown(facetStatsPrice?.min?.toDouble()!!,facetStatsPrice.max.toDouble())
+                    setDropDown(facetStatsPrice?.min?.toDouble()!!, facetStatsPrice.max.toDouble())
                 }
 
-                if(filterState.getFacetFilters(Kensium.groupIDBrand).isNotEmpty()
-                        || filterState.getFacetFilters(Kensium.groupIDCategoryLvl1).isNotEmpty()){
-                    if(!isClear){
+                if(filterState.getFacetFilters(Kensium.groupIDBrand).isNotEmpty()){
+                    if (response.facetsOrNull!!.get(Attribute("brand"))?.size!! > 0) {
+                        brandCount.postValue(-1)
+                    }else{
+                        brandCount.postValue(1)
+                    }
+                }
+
+                if(filterState.getFacetFilters(Kensium.groupIDCategoryLvl1).isNotEmpty()){
+                    if (response.facetsOrNull!!.get(Attribute("categories.level1"))?.size!! > 0) {
+                        cateCount.postValue(-1)
+                    }else{
+                        cateCount.postValue(1)
+                    }
+                }
+
+                if (filterState.getFacetFilters(Kensium.groupIDBrand).isNotEmpty()
+                        || filterState.getFacetFilters(Kensium.groupIDCategoryLvl1).isNotEmpty()) {
+                    if (!isClear) {
                         filterState.notify {
                             clear(Kensium.groupIDPrice)
                         }
                     }
 
-                    setDropDown(facetStatsPrice?.min?.toDouble()!!,facetStatsPrice.max.toDouble())
+                    setDropDown(facetStatsPrice?.min?.toDouble()!!, facetStatsPrice.max.toDouble())
                 }
             }
 
 
         }
     }
+
     private fun setDropDown(min: Double, max: Double) {
 
         val minValue: Double

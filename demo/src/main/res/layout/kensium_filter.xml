@@ -45,6 +45,19 @@
         app:layout_constraintVertical_bias="0"
         app:layout_constraintWidth_percent="0.30" />
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/priceFilterList"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        android:id="@+id/tvEmptyPrice"
+        android:text="No data found"
+        android:visibility="visible"
+        />
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/brandFilterList"
         android:layout_width="0dp"
@@ -56,6 +69,18 @@
         app:layout_constraintTop_toTopOf="@id/guideline"
         app:layout_constraintWidth_percent="0.25" />
 
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/tvEmptyBrand"
+        android:text="No data found"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/categoryFilterList"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryFilterList"
         android:layout_width="0dp"
@@ -66,5 +91,17 @@
         app:layout_constraintStart_toEndOf="@id/brandFilterList"
         app:layout_constraintTop_toTopOf="@id/guideline"
         app:layout_constraintWidth_percent="0.38" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/priceFilterList"
+        app:layout_constraintStart_toEndOf="@id/brandFilterList"
+        app:layout_constraintTop_toTopOf="@id/guideline"
+        android:id="@+id/tvEmptyCat"
+        android:text="No data found"
+        android:visibility="gone"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

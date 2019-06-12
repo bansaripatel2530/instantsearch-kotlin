@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +32,58 @@ class FilterFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val shared = ViewModelProviders.of(requireActivity()).get(KensiumViewModel::class.java)
 
+
+        viewModel.brandCount.observe(this, Observer {
+            if(isVisible){
+                if(it == -1){
+                    tvEmptyBrand.visibility = View.VISIBLE
+                    brandFilterList.visibility = View.INVISIBLE
+                }else{
+                    tvEmptyBrand.visibility = View.GONE
+                    brandFilterList.visibility = View.VISIBLE
+
+                }
+            }
+
+        })
+
+        viewModel.cateCount.observe(this, Observer {
+            if(isVisible){
+                if(it == -1){
+                    tvEmptyCat.visibility = View.VISIBLE
+                    categoryFilterList.visibility = View.INVISIBLE
+                }else{
+                    tvEmptyCat.visibility = View.GONE
+                    categoryFilterList.visibility = View.VISIBLE
+
+                }
+            }
+
+        })
+
+//        viewModel.searcher.onResponseChanged += {
+//            if(isVisible){
+//                if(viewModel.adapterBrand.itemCount == 0 ){
+//                    tvEmptyBrand.visibility = View.VISIBLE
+//                }else{
+//                    tvEmptyBrand.visibility = View.GONE
+//                }
+//                if(viewModel.adapterCategoryLvl1.itemCount == 0 ){
+//                    tvEmptyCat.visibility = View.VISIBLE
+//                }else{
+//                    tvEmptyCat.visibility = View.GONE
+//                }
+//                if(viewModel.adapterPrice.itemCount == 0 ){
+//                    tvEmptyPrice.visibility = View.VISIBLE
+//                }else{
+//                    tvEmptyPrice.visibility = View.GONE
+//                }
+//            }
+//
+//        }
+
+
+
         brandFilterList.let {
             it.adapter = viewModel.adapterBrand
             it.layoutManager = LinearLayoutManager(context)
@@ -56,6 +109,9 @@ class FilterFragment : Fragment() {
                 clear(Kensium.groupIDPrice)
                 clear(Kensium.groupIDBrand)
             }
+
+            viewModel.brandCount.postValue(1)
+            viewModel.cateCount.postValue(1)
         }
         buttonSubmit.setOnClickListener {
             viewModel.products.value?.dataSource?.invalidate()

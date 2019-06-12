@@ -1,6 +1,8 @@
 package com.algolia.instantsearch.demo.kensium.product
 
+import android.util.Log
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -18,6 +20,10 @@ class ProductAdapter : PagedListAdapter<Product, ProductViewHolder>(diffUtil) {
         val product = getItem(position)
 
         if (product != null) holder.bind(product)
+
+        holder.itemView.setOnClickListener {
+            Log.e("Click-->",product?.name)
+        }
     }
 
     companion object {

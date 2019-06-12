@@ -16,9 +16,14 @@ object Kensium  {
     val brand = Attribute("brand")
     val categoryLvl0 = Attribute("categories.level0")
     val categoryLvl1 = Attribute("categories.level1")
+    val categoryLvl2 = Attribute("categories.level2")
+
     //comment kensium
     val groupIDCategoryLvl0 = FilterGroupID(categoryLvl0, FilterOperator.And)
     val groupIDCategoryLvl1 = FilterGroupID(categoryLvl1, FilterOperator.Or)
+    val groupIDCategoryLvl2 = FilterGroupID(categoryLvl2, FilterOperator.Or)
+
+//    val groupIDCategoryLvl1 = FilterGroupID(categoryLvl1, FilterOperator.Or)
     val groupIDBrand = FilterGroupID(brand, FilterOperator.Or)
     val groupIDPrice = FilterGroupID(price, FilterOperator.And)
 

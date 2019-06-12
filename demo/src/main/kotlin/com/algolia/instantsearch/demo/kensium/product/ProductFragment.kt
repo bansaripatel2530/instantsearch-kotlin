@@ -31,17 +31,33 @@ class ProductFragment : Fragment() {
         if (arguments  != null) {
             val category = arguments!!.getString("categoryLvl0")!!
 //            val filter = Filter.Facet(Kensium.categoryLvl0, category)
-            val filter1 = Filter.Facet(Kensium.categoryLvl0,category)
+//            val filter1 = Filter.Facet(Kensium.categoryLvl0,category)
+            val filter1 = Filter.Facet(Kensium.categoryLvl2,"Hair /// Shampoo & Conditioner /// Shampoo")
             viewModel.filterState.notify {
                 clear()
 //                add(Kensium.groupIDCategoryLvl0, filter)
-                add(Kensium.groupIDCategoryLvl0,filter1)
+                add(Kensium.groupIDCategoryLvl2,filter1)
             }
         }
 
+        viewModel.products.observe(this, Observer {
+            if(isVisible){
+                if(it.isEmpty()){
+                    tvEmpty.visibility = View.VISIBLE
+                    productList.visibility = View.GONE
+                }else{
+                    tvEmpty.visibility = View.GONE
+                    productList.visibility = View.VISIBLE
+                }
+                productList.smoothScrollToPosition(0)
+            }
+            viewModel.adapterProduct.submitList(it)
+        })
 
-        viewModel.products.observe(this, Observer { hits -> viewModel.adapterProduct.submitList(hits) })
+//        viewModel.products.observe(this, Observer { hits -> viewModel.adapterProduct.submitList(hits) })
     }
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.kensium_product, container, false)

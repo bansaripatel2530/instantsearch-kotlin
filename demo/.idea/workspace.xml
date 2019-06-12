@@ -6,21 +6,24 @@
     </shared>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="http" />
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="verbose" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="click" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bc3a54c1-1769-4c07-b66d-e37e6bb5fbc4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../buildSrc/src/main/kotlin/dependency/Library.kt" beforeDir="false" afterPath="$PROJECT_DIR$/../buildSrc/src/main/kotlin/dependency/Library.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/navEditor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/navEditor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/Kensium.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/Kensium.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumViewModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumViewModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/category/CategoryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/category/CategoryFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/filter/FilterFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/filter/FilterFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/res/navigation/navigation.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/navigation/navigation.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/SubCategoryFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/SubCategoryFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/kensium_filter.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/kensium_filter.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/res/layout/kensium_product.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/res/layout/kensium_product.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/../core/.gradle/" />
     <ignored path="$PROJECT_DIR$/../core/build/" />
@@ -49,11 +52,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumViewModel.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="277" column="5" selection-start-line="277" selection-start-column="5" selection-end-line="277" selection-end-column="5" />
+            <state relative-caret-position="1026">
+              <caret line="131" column="9" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -61,32 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="618">
-              <caret line="51" selection-start-line="51" selection-end-line="51" />
-              <folding>
-                <element signature="e#48#581#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/category/CategoryFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="34" column="66" selection-start-line="34" selection-start-column="66" selection-end-line="34" selection-end-column="66" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/SubCategoryFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="36" column="62" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
-              <folding>
-                <element signature="e#60#633#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="513">
+              <caret line="39" column="15" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -94,31 +73,19 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
-              <caret line="32" column="60" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="60" />
-              <folding>
-                <element signature="e#56#987#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="1178">
+              <caret line="79" column="1" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/util/DialogUtils.kt">
+        <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/filter/FilterFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" selection-start-line="2" selection-end-line="2" />
-              <folding>
-                <element signature="e#45#443#0" expanded="true" />
-                <element signature="e#5470#5506#1" expanded="true" />
-              </folding>
+            <state relative-caret-position="95">
+              <caret line="77" column="22" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/baseinrerface/ConnectionBridge.kt">
-          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -133,9 +100,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Log.i(&quot;</find>
-      <find>HDLGLOLEHS-dsn.algolia.net</find>
-      <find>dsn.algolia.net</find>
       <find>onCrea</find>
       <find>BODY START</find>
       <find>applicationID</find>
@@ -163,6 +127,9 @@
       <find>categoryLvl0</find>
       <find>adapterCategoryLvl0</find>
       <find>searchView</find>
+      <find>recyclerview</find>
+      <find>FacetListAdapter</find>
+      <find>adapterBrand</find>
     </findStrings>
     <replaceStrings>
       <replace>KensiumActivity.viewModel?</replace>
@@ -182,7 +149,6 @@
         <option value="$PROJECT_DIR$/../helper/src/commonMain/kotlin/com/algolia/instantsearch/helper/filter/facet/FacetListPresenter.kt" />
         <option value="$PROJECT_DIR$/../helper/src/commonMain/kotlin/com/algolia/instantsearch/helper/filter/facet/FacetListConnectView.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/filter/facet/FacetListViewHolder.kt" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/kensium_filter.xml" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/filter/list/FilterListAllDemo.kt" />
         <option value="$PROJECT_DIR$/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/ProductAdapter.kt" />
@@ -202,29 +168,30 @@
         <option value="$PROJECT_DIR$/build.gradle.kts" />
         <option value="$PROJECT_DIR$/../core/src/commonTest/kotlin/searcher/TestDebouncer.kt" />
         <option value="$PROJECT_DIR$/../buildSrc/src/main/kotlin/dependency/Library.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/filter/facet/FacetListAdapter.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/home/HomeActivities.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductAdapter.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/filter/FilterPriceAdapter.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/filter/FilterFragment.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/Kensium.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/Demo.kt" />
         <option value="$PROJECT_DIR$/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/list_item_large.xml" />
         <option value="$PROJECT_DIR$/../helper/src/commonMain/kotlin/com/algolia/instantsearch/helper/searcher/SearcherSingleIndex.kt" />
         <option value="$PROJECT_DIR$/src/main/res/layout/kensium_activity.xml" />
-        <option value="$PROJECT_DIR$/src/main/res/layout/kensium_product.xml" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/SubCategoryViewHolder.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/SubCategoryAdapter.kt" />
         <option value="$PROJECT_DIR$/src/main/res/layout/kensium_subcat.xml" />
         <option value="$PROJECT_DIR$/src/main/res/layout/kensium_subcate.xml" />
         <option value="$PROJECT_DIR$/src/main/res/navigation/navigation.xml" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/util/DialogUtils.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumViewModel.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/category/CategoryFragment.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/Kensium.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductAdapter.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/SubCategoryFragment.kt" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/kensium_product.xml" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductFragment.kt" />
         <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/category/CategoryFragment.kt" />
-        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/SubCategoryFragment.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/filter/facet/FacetListAdapter.kt" />
+        <option value="$PROJECT_DIR$/src/main/res/layout/kensium_filter.xml" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumViewModel.kt" />
+        <option value="$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/filter/FilterFragment.kt" />
       </list>
     </option>
   </component>
@@ -242,6 +209,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -249,102 +217,12 @@
               <item name="demo" type="b2602c69:ProjectViewProjectNode" />
               <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="algolia" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="algolia" type="462c0819:PsiDirectoryNode" />
-              <item name="instantsearch" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="algolia" type="462c0819:PsiDirectoryNode" />
-              <item name="instantsearch" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="kotlin" type="462c0819:PsiDirectoryNode" />
-              <item name="com" type="462c0819:PsiDirectoryNode" />
-              <item name="algolia" type="462c0819:PsiDirectoryNode" />
-              <item name="instantsearch" type="462c0819:PsiDirectoryNode" />
-              <item name="demo" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="demo" type="b2602c69:ProjectViewProjectNode" />
-              <item name="instantsearch-kotlin" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="demo" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -462,9 +340,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="75" y="24" width="1279" height="744" extended-state="4" />
+    <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.08759124" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.12489862" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -475,12 +354,12 @@
       <window_info anchor="bottom" id="Run" order="0" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4087838" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.32263514" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.31986532" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.3293919" />
       <window_info anchor="bottom" id="Build" order="6" weight="0.36824325" />
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.3293919" />
-      <window_info active="true" anchor="bottom" id="Logcat" order="8" visible="true" weight="0.6165541" />
+      <window_info anchor="bottom" id="Logcat" order="8" weight="0.3885135" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.3293919" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.32927817" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -492,7 +371,7 @@
     </layout>
     <layout-to-restore>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.17842661" />
+      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.12489862" />
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -503,12 +382,12 @@
       <window_info anchor="bottom" id="Run" order="0" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Debug" order="2" weight="0.4087838" />
-      <window_info anchor="bottom" id="Terminal" order="3" weight="0.32263514" />
+      <window_info anchor="bottom" id="Terminal" order="3" weight="0.31986532" />
       <window_info anchor="bottom" id="Event Log" order="4" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="5" weight="0.3293919" />
       <window_info anchor="bottom" id="Build" order="6" weight="0.36824325" />
       <window_info anchor="bottom" id="Android Profiler" order="7" weight="0.3293919" />
-      <window_info anchor="bottom" id="Logcat" order="8" weight="0.49155405" />
+      <window_info anchor="bottom" id="Logcat" order="8" weight="0.6013514" />
       <window_info anchor="bottom" id="Find" order="9" weight="0.3293919" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" weight="0.32927817" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
@@ -651,18 +530,6 @@
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/../helper/src/commonMain/kotlin/com/algolia/instantsearch/helper/searcher/SearcherSingleIndex.kt</url>
-          <line>37</line>
-          <properties />
-          <option name="timeStamp" value="187" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/../helper/src/commonMain/kotlin/com/algolia/instantsearch/helper/searcher/SearcherSingleIndex.kt</url>
-          <line>41</line>
-          <properties />
-          <option name="timeStamp" value="188" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/../core/src/commonTest/kotlin/searcher/TestDebouncer.kt</url>
           <line>34</line>
           <properties />
@@ -679,24 +546,6 @@
           <line>2283</line>
           <properties />
           <option name="timeStamp" value="193" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt</url>
-          <line>61</line>
-          <properties />
-          <option name="timeStamp" value="242" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt</url>
-          <line>53</line>
-          <properties />
-          <option name="timeStamp" value="245" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt</url>
-          <line>41</line>
-          <properties />
-          <option name="timeStamp" value="246" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-field">
           <url>file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/Demo.kt</url>
@@ -722,67 +571,55 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>searchView.findViewById&lt;AppCompatEditText&gt;(et)</expression-string>
-        <language-id>kotlin</language-id>
-        <custom-info>import android.app.ApplicationErrorReport</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>searchBoxView.searchView.findViewById&lt;AppCompatEditText&gt;(et)</expression-string>
-        <language-id>kotlin</language-id>
-        <custom-info>import android.app.ApplicationErrorReport</custom-info>
-        <evaluation-mode>EXPRESSION</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>searchView.getContext()                    .getResources()                    .getIdentifier(&quot;android:id/search_src_text&quot;, null, null)</expression-string>
+        <expression-string>filterState.getFacetFilters(Kensium.groupIDBrand)</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>searchView.findViewById(R.id.search_src_text) as AppCompatEditText</expression-string>
+        <expression-string>response.facetsOrNull</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>searchView.findViewById(R.id.search_src_text)</expression-string>
+        <expression-string>viewModel.adapterBrand.itemCount</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>searchBoxView.searchView.findViewById(R.id.search_src_text) as AppCompatEditText</expression-string>
+        <expression-string>viewModel.adapterBrand</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>searchBoxView.searchView.findViewById(com.algolia.instantsearch.demo.R.id.search_src_text) as AppCompatEditText</expression-string>
+        <expression-string>response.facetsOrNull.get(Attribute(&quot;categories.level1&quot;))</expression-string>
+        <language-id>kotlin</language-id>
+        <custom-info>import com.algolia.search.model.Attribute</custom-info>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>response.facetsOrNull.get(&quot;categories.level1&quot;)</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>searchBoxView.searchView.findViewById&lt;&gt;(com.algolia.instantsearch.demo.R.id.search_src_text)</expression-string>
+        <expression-string>response.facetsOrNull.get(&quot;brand&quot;)</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>searchBoxView.searchView</expression-string>
+        <expression-string>response</expression-string>
+        <language-id>kotlin</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>response.facetStats</expression-string>
         <language-id>kotlin</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/search/SearchAsYouTypeDemo.kt" />
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/index/IndexSegmentDemo.kt" />
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/filter/facet/FacetListAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="213">
-          <caret line="18" column="23" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="23" />
-          <folding>
-            <element signature="e#53#465#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/filter/list/FilterListAdapter.kt" />
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/home/HomeActivities.kt" />
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductPagedAdapter.kt" />
@@ -820,37 +657,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/Demo.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1012">
-          <caret line="219" column="85" selection-start-line="219" selection-start-column="85" selection-end-line="219" selection-end-column="85" />
-          <folding>
-            <element signature="e#4778#4802#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/filter/FilterFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="26" column="68" selection-start-line="26" selection-start-column="68" selection-end-line="26" selection-end-column="68" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/list_item_large.xml">
       <provider editor-type-id="android-designer2" />
@@ -902,24 +715,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/kensium_product.xml">
-      <provider editor-type-id="android-designer2" />
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="39" column="30" selection-start-line="39" selection-start-column="30" selection-end-line="39" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../helper/src/commonMain/kotlin/com/algolia/instantsearch/helper/searcher/SearcherSingleIndex.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-          <folding>
-            <element signature="e#51#622#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/androidx.navigation/navigation-fragment/2.1.0-alpha04/29258d713862e48598e9006cd95a8e18f5c7c0e6/navigation-fragment-2.1.0-alpha04-sources.jar!/androidx/navigation/fragment/NavHostFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-179">
@@ -942,13 +737,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/CategoryAdapter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="33" selection-start-column="20" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/CategoryAdapter.kt" />
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/category/CategoryViewHolder.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="209">
@@ -973,21 +762,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/Kensium_subCat.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/res/layout/kensium_subcat.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/Kensium_subCat.kt" />
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/kensium_subcat.xml" />
     <entry file="file://$PROJECT_DIR$/src/main/res/layout/kensium_category.xml">
       <provider selected="true" editor-type-id="android-designer2" />
       <provider editor-type-id="text-editor">
@@ -1014,32 +790,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/Kensium.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/res/navigation/navigation.xml">
       <provider selected="true" editor-type-id="nav-designer" />
       <provider editor-type-id="text-editor">
         <state relative-caret-position="589">
           <caret line="34" column="74" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/baseinrerface/ConnectionBridge.kt">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/util/DialogUtils.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" selection-start-line="2" selection-end-line="2" />
-          <folding>
-            <element signature="e#45#443#0" expanded="true" />
-            <element signature="e#5470#5506#1" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1078,47 +833,113 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumViewModel.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/util/DialogUtils.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="277" column="5" selection-start-line="277" selection-start-column="5" selection-end-line="277" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="32" column="60" selection-start-line="32" selection-start-column="48" selection-end-line="32" selection-end-column="60" />
+        <state relative-caret-position="38">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
           <folding>
-            <element signature="e#56#987#0" expanded="true" />
+            <element signature="e#45#443#0" expanded="true" />
+            <element signature="e#5470#5506#1" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/baseinrerface/ConnectionBridge.kt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/Kensium.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="51" selection-start-line="51" selection-end-line="51" />
-          <folding>
-            <element signature="e#48#581#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="366">
+          <caret line="27" column="44" lean-forward="true" selection-start-line="27" selection-start-column="44" selection-end-line="27" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/category/CategoryFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
+        <state relative-caret-position="190">
           <caret line="34" column="66" selection-start-line="34" selection-start-column="66" selection-end-line="34" selection-end-column="66" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/subcategory/SubCategoryFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="36" column="62" selection-start-line="36" selection-start-column="62" selection-end-line="36" selection-end-column="62" />
+        <state relative-caret-position="409">
+          <caret line="41" column="1" lean-forward="true" selection-start-line="41" selection-start-column="1" selection-end-line="41" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="551">
+          <caret line="36" column="54" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/Demo.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2090">
+          <caret line="156" column="30" selection-start-line="156" selection-start-column="30" selection-end-line="156" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/kensium_product.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="67" column="23" lean-forward="true" selection-start-line="67" selection-start-column="23" selection-end-line="67" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../helper/src/commonMain/kotlin/com/algolia/instantsearch/helper/searcher/SearcherSingleIndex.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
           <folding>
-            <element signature="e#60#633#0" expanded="true" />
+            <element signature="e#51#622#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/filter/facet/FacetListAdapter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-223">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/res/layout/kensium_filter.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="626">
+          <caret line="95" column="42" selection-start-line="95" selection-start-column="42" selection-end-line="95" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="39" column="15" selection-start-line="39" selection-start-column="15" selection-end-line="39" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/filter/FilterFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="77" column="22" selection-start-line="77" selection-start-column="22" selection-end-line="77" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/product/ProductFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1178">
+          <caret line="79" column="1" selection-start-line="79" selection-start-column="1" selection-end-line="79" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/kotlin/com/algolia/instantsearch/demo/kensium/KensiumViewModel.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1026">
+          <caret line="131" column="9" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
         </state>
       </provider>
     </entry>
