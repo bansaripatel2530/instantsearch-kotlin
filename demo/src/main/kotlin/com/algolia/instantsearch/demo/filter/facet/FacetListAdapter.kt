@@ -15,9 +15,6 @@ import com.algolia.search.model.search.Facet
 class FacetListAdapter :
     ListAdapter<FacetListItem, FacetListViewHolder>(diffUtil),
     FacetListView {
-    override fun setItem(item: List<SelectableItem<Facet>>) {
-        submitList(item)
-    }
 
     override var onClick: ((Facet) -> Unit)? = null
 
@@ -51,5 +48,9 @@ class FacetListAdapter :
                 return oldItem == newItem
             }
         }
+    }
+
+    override fun setSelectableItems(selectableItems: List<SelectableItem<Facet>>) {
+        submitList(selectableItems)
     }
 }

@@ -8,15 +8,13 @@ import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
-import com.algolia.instantsearch.core.searchbox.connectView
 import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.demo.kensium.Kensium
 import com.algolia.instantsearch.demo.kensium.KensiumActivity
 import com.algolia.instantsearch.demo.kensium.KensiumViewModel
-import com.algolia.instantsearch.helper.android.index.IndexSegmentViewSpinner
+import com.algolia.instantsearch.helper.android.selectable.SelectableSegmentViewSpinner
 import com.algolia.instantsearch.helper.index.connectView
 import com.algolia.search.model.filter.Filter
-import kotlinx.android.synthetic.main.kensium_activity.*
 import kotlinx.android.synthetic.main.kensium_product.*
 
 
@@ -58,7 +56,6 @@ class ProductFragment : Fragment() {
     }
 
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.kensium_product, container, false)
     }
@@ -67,7 +64,7 @@ class ProductFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val adapterSortBy = ArrayAdapter<String>(requireContext(), R.layout.menu_item)
-        val sortByView = IndexSegmentViewSpinner(spinner, adapterSortBy)
+        val sortByView = SelectableSegmentViewSpinner(spinner, adapterSortBy)
 
         viewModel.indexSegmentViewModel.connectView(sortByView, viewModel.presenterSortBy)
         productList.let {

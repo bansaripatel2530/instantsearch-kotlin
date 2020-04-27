@@ -1,7 +1,6 @@
 package com.algolia.instantsearch.demo.kensium
 
 import com.algolia.instantsearch.helper.filter.state.FilterGroupID
-import com.algolia.instantsearch.helper.filter.state.FilterOperator
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
@@ -19,13 +18,13 @@ object Kensium  {
     val categoryLvl2 = Attribute("categories.level2")
 
     //comment kensium
-    val groupIDCategoryLvl0 = FilterGroupID(categoryLvl0, FilterOperator.And)
-    val groupIDCategoryLvl1 = FilterGroupID(categoryLvl1, FilterOperator.Or)
-    val groupIDCategoryLvl2 = FilterGroupID(categoryLvl2, FilterOperator.Or)
+    val groupIDCategoryLvl0 = FilterGroupID.And(categoryLvl0)
+    val groupIDCategoryLvl1 = FilterGroupID.Or(categoryLvl1)
+    val groupIDCategoryLvl2 = FilterGroupID.Or(categoryLvl2)
 
 //    val groupIDCategoryLvl1 = FilterGroupID(categoryLvl1, FilterOperator.Or)
-    val groupIDBrand = FilterGroupID(brand, FilterOperator.Or)
-    val groupIDPrice = FilterGroupID(price, FilterOperator.And)
+val groupIDBrand = FilterGroupID.Or(brand)
+    val groupIDPrice = FilterGroupID.And(price)
 
     private val applicationID = ApplicationID("HDLGLOLEHS")
     private val apiKey = APIKey("75025d6975e4c9a012de7163cde4e42d")

@@ -11,13 +11,9 @@ import com.algolia.instantsearch.helper.filter.FilterPresenter
 import com.algolia.instantsearch.helper.filter.list.FilterListView
 import com.algolia.search.model.filter.Filter
 
-
 class FilterPriceAdapter(val presenter: FilterPresenter) :
     ListAdapter<SelectableItem<Filter.Numeric>, FilterPriceViewHolder>(DiffUtilItem()),
     FilterListView<Filter.Numeric> {
-    override fun setItem(items: List<SelectableItem<Filter.Numeric>>) {
-        submitList(items)
-    }
 
     override var onClick: ((Filter.Numeric) -> Unit)? = null
 
@@ -28,10 +24,10 @@ class FilterPriceAdapter(val presenter: FilterPresenter) :
     override fun onBindViewHolder(holder: FilterPriceViewHolder, position: Int) {
         val (filter, selected) = getItem(position)
 
-        holder.bind(presenter(filter), selected, View.OnClickListener { onClick?.invoke(filter) })
+        holder.bind(presenter(filter), selected, View.OnClickListener {
+            onClick?.invoke(filter)
+        })
     }
-
-
 
     private class DiffUtilItem: DiffUtil.ItemCallback<SelectableItem<Filter.Numeric>>() {
 
@@ -42,5 +38,9 @@ class FilterPriceAdapter(val presenter: FilterPresenter) :
         override fun areContentsTheSame(oldItem: SelectableItem<Filter.Numeric>, newItem: SelectableItem<Filter.Numeric>): Boolean {
             return oldItem == newItem
         }
+    }
+
+    override fun setSelectableItems(selectableItems: List<SelectableItem<Filter.Numeric>>) {
+        submitList(selectableItems)
     }
 }

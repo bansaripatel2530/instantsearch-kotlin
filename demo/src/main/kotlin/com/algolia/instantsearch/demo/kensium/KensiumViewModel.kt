@@ -12,7 +12,6 @@ import com.algolia.instantsearch.demo.kensium.product.Product
 import com.algolia.instantsearch.demo.kensium.product.ProductAdapter
 import com.algolia.instantsearch.demo.kensium.subcategory.SubCategoryAdapter
 import com.algolia.instantsearch.helper.android.list.SearcherSingleIndexDataSource
-import com.algolia.instantsearch.helper.android.searchbox.connectSearcher
 import com.algolia.instantsearch.helper.attribute.AttributeMatchAndReplace
 import com.algolia.instantsearch.helper.filter.FilterPresenterImpl
 import com.algolia.instantsearch.helper.filter.facet.*
@@ -22,15 +21,14 @@ import com.algolia.instantsearch.helper.filter.list.connectView
 import com.algolia.instantsearch.helper.filter.state.FilterState
 import com.algolia.instantsearch.helper.index.IndexPresenter
 import com.algolia.instantsearch.helper.index.IndexSegmentViewModel
+import com.algolia.instantsearch.helper.searchbox.connectSearcher
 import com.algolia.instantsearch.helper.searcher.SearcherForFacets
 import com.algolia.instantsearch.helper.searcher.SearcherSingleIndex
 import com.algolia.instantsearch.helper.searcher.addFacet
-import com.algolia.instantsearch.helper.searcher.connectFilterState
 import com.algolia.search.client.Index
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.NumericOperator
-
 
 /**
  * This class will be shared with all fragments from the same activity.
@@ -44,7 +42,9 @@ class KensiumViewModel : ViewModel() {
     val cateCount = MutableLiveData<Int>()
     val priceCount = MutableLiveData<Int>()
     val searcher = SearcherSingleIndex(Kensium.index).apply {
-        connectFilterState(filterState)
+        val viewModel = FilterListViewModel.Facet()
+        viewModel.connectFilterState(filterState)
+        //TODO comment this line because connectFilterState() is not found
     }
     val searcherForFacets = SearcherForFacets(Kensium.index, Kensium.categoryLvl0)
     val searchForSubCatFacets = SearcherForFacets(Kensium.index, Kensium.categoryLvl0)
@@ -87,7 +87,9 @@ class KensiumViewModel : ViewModel() {
      * You can pass several [FacetSortCriterion] in the [FacetListPresenter.sortBy] parameter.
      * Each of them will be applied. The order in which each of them is passed determines the priority of each sorting criteria.
      */
-    val presenterFacetList = FacetListPresenterImpl(listOf(
+    //TODO method name change
+    val presenterFacetList = FacetListPresenter(
+        listOf(
             FacetSortCriterion.AlphabeticalDescending), 1000000
     )
 
@@ -122,7 +124,7 @@ class KensiumViewModel : ViewModel() {
             it.response?.let { response -> adapterCategoryLvl0.submitList(response.facets) }
             it.onResponseChanged += { response -> adapterCategoryLvl0.submitList(response.facets) }
             it.onErrorChanged += { error -> showErrorDialog.postValue(error.message) }
-            it.searchAsync()
+            it.search()
         }
     }
 
@@ -270,7 +272,7 @@ class KensiumViewModel : ViewModel() {
         list.add(Filter.Numeric(Kensium.price, NumericOperator.Greater, priceList[priceList.size - 1].toDouble()))
 
 
-        priceViewModel.item = list
+        priceViewModel.items = list
 
 
     }
@@ -287,13 +289,14 @@ class KensiumViewModel : ViewModel() {
          * This is necessary when we change index with an [IndexSegmentViewModel].
          */
         indexSegmentViewModel.onSelectedComputed += { index ->
-            indexSegmentViewModel.item[index]?.let { searcher.index = it }
+            indexSegmentViewModel.items[index]?.let { searcher.index = it }
             products.value?.dataSource?.invalidate()
         }
     }
 
     private fun configureSearchBox() {
-        searchBoxViewModel.connectSearcher(searcher, products)
+        //TODO parameter type changes (list => boolen)
+        searchBoxViewModel.connectSearcher(searcher, searchAsYouType = true)
     }
 
     override fun onCleared() {
