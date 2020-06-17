@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/navigation"
-    app:startDestination="@id/fragmentCategory">
+    app:startDestination="@id/fragmentProduct">
     <fragment
         android:id="@+id/fragmentCategory"
         android:name="com.algolia.instantsearch.demo.kensium.category.CategoryFragment"

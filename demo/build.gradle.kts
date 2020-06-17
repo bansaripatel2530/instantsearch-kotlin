@@ -37,6 +37,7 @@ android {
 
     packagingOptions {
         // FIXME: Solve these "More than one file was found with OS independent path 'META-INF/*' in the lib via Proguard
+        exclude ("META-INF/*.kotlin_module")
         exclude("META-INF/kotlinx-coroutines-core.kotlin_module")
         exclude("META-INF/ktor-http.kotlin_module")
         exclude("META-INF/kotlinx-io.kotlin_module")
@@ -61,7 +62,7 @@ android {
 }
 
 dependencies {
-    implementation(Library("helper-android"))
+    implementation(Library())
 //    implementation(project(":helper"))
     implementation(kotlin("stdlib-jdk8"))
 

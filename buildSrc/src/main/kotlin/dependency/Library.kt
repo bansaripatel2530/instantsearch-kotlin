@@ -4,8 +4,8 @@ package dependency
 object Library: Dependency  {
 
     override val group = "com.algolia"
-    override val artifact = "instantsearch-kotlin"
-    override val version = "1.0.0-beta03"
+    override val artifact = "instantsearch-android"
+    override val version = "2.3.1"
 
     val artifactCore = "$artifact-core"
     val artifactCoreCommon = "$artifactCore-common"
