@@ -20,10 +20,10 @@ class SubCategoryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = (activity as KensiumActivity).viewModel
-        val filter1 = Filter.Facet(Kensium.categoryLvl0,"Hair")
-        viewModel?.filterState?.notify {
-            add(Kensium.groupIDCategoryLvl0,filter1)
-        }
+        val filter1 = Filter.Facet(Kensium.categoryLvl0,"Barber Tools")
+//        viewModel?.filterState?.notify {
+//            add(Kensium.groupIDCategoryLvl0,filter1)
+//        }
 
     }
 
@@ -35,7 +35,7 @@ class SubCategoryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         btnShampoo.setOnClickListener {
-            val bundle = bundleOf("categoryLvl0" to "Shampoo")
+            val bundle = bundleOf("categoryLvl0" to "Blades")
             findNavController().navigate(R.id.action_subCategoryFragment_to_fragmentProduct, bundle)
         }
     }

@@ -5,7 +5,7 @@
     <string name="clear_all">Clear all</string>
     <string name="search_demos">Search for demos</string>
     <string name="search_brands">Search for brands</string>
-    <string name="search_movies">Search for movies</string>
+    <string name="search_movies">Search for Products</string>
     <string name="product_title">"%s"</string>
     <string name="template_title">"%s (%s)"</string>
     <string name="numeric_filters">Numeric Filters</string>

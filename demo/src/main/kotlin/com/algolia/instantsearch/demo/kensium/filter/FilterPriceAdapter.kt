@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
+import com.algolia.instantsearch.core.Callback
 import com.algolia.instantsearch.core.selectable.list.SelectableItem
 import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.demo.inflate
@@ -15,7 +16,7 @@ class FilterPriceAdapter(val presenter: FilterPresenter) :
     ListAdapter<SelectableItem<Filter.Numeric>, FilterPriceViewHolder>(DiffUtilItem()),
     FilterListView<Filter.Numeric> {
 
-    override var onClick: ((Filter.Numeric) -> Unit)? = null
+    var onClick: ((Filter.Numeric) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FilterPriceViewHolder {
         return FilterPriceViewHolder(parent.inflate(R.layout.list_item_selectable))
@@ -40,7 +41,15 @@ class FilterPriceAdapter(val presenter: FilterPresenter) :
         }
     }
 
-    override fun setSelectableItems(selectableItems: List<SelectableItem<Filter.Numeric>>) {
+    fun setSelectableItems(selectableItems: List<SelectableItem<Filter.Numeric>>) {
         submitList(selectableItems)
+    }
+
+    override var onSelection: Callback<Filter.Numeric>?
+        get() = TODO("Not yet implemented")
+        set(value) {}
+
+    override fun setItems(items: List<SelectableItem<Filter.Numeric>>) {
+        TODO("Not yet implemented")
     }
 }

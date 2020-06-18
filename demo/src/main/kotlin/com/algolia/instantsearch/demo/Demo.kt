@@ -1,12 +1,17 @@
-package com.algolia.instantsearch.demo
+package com.algolia.instantsearch.showcase
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.text.Spannable
 import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.SpannedString
+import android.text.style.ForegroundColorSpan
 import android.text.style.ImageSpan
+import android.text.style.StyleSpan
 import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
@@ -14,39 +19,52 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.algolia.instantsearch.core.searchbox.SearchBoxViewModel
-import com.algolia.instantsearch.helper.android.highlight
+import com.algolia.instantsearch.core.connection.ConnectionHandler
+import com.algolia.instantsearch.core.searcher.Searcher
+import com.algolia.instantsearch.demo.R
+import com.algolia.instantsearch.helper.android.filter.clear.FilterClearViewImpl
+import com.algolia.instantsearch.helper.android.list.autoScrollToStart
 import com.algolia.instantsearch.helper.android.searchbox.SearchBoxViewAppCompat
+import com.algolia.instantsearch.helper.android.stats.StatsTextViewSpanned
+import com.algolia.instantsearch.helper.filter.clear.FilterClearConnector
+import com.algolia.instantsearch.helper.filter.clear.connectView
+import com.algolia.instantsearch.helper.filter.state.FilterGroupID
 import com.algolia.instantsearch.helper.filter.state.FilterState
 import com.algolia.instantsearch.helper.filter.state.toFilterGroups
-import com.algolia.instantsearch.helper.searchbox.connectSearcher
+import com.algolia.instantsearch.helper.searchbox.SearchBoxConnector
 import com.algolia.instantsearch.helper.searchbox.connectView
-import com.algolia.instantsearch.helper.searcher.Searcher
 import com.algolia.instantsearch.helper.searcher.SearcherForFacets
 import com.algolia.instantsearch.helper.searcher.SearcherSingleIndex
+import com.algolia.instantsearch.helper.stats.StatsConnector
+import com.algolia.instantsearch.helper.stats.StatsPresenter
+import com.algolia.instantsearch.helper.stats.connectView
 import com.algolia.search.client.ClientSearch
 import com.algolia.search.configuration.ConfigurationSearch
 import com.algolia.search.model.APIKey
 import com.algolia.search.model.ApplicationID
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
+import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.filter.FilterGroup
+import com.algolia.search.model.filter.FilterGroupsConverter
 import com.algolia.search.serialize.KeyIndexName
 import com.algolia.search.serialize.KeyName
 import io.ktor.client.features.logging.LogLevel
+
 
 val client = ClientSearch(
     ConfigurationSearch(
         ApplicationID("latency"),
         APIKey("1f6fd3a6fb973cb08419fe7d288fa4db"),
-        writeTimeout = 60000,
-        readTimeout = 60000,
-        logLevel = LogLevel.NONE
+        logLevel = LogLevel.ALL
     )
 )
 
-val stubIndex = client.initIndex(IndexName("stub"))
+val stubIndex = client.initIndex(IndexName("production_default_products"))
 
 fun AppCompatActivity.configureToolbar(toolbar: Toolbar) {
     setSupportActionBar(toolbar)
@@ -56,6 +74,8 @@ fun AppCompatActivity.configureToolbar(toolbar: Toolbar) {
 
     }
 }
+
+
 
 fun AppCompatActivity.onFilterChangedThenUpdateFiltersText(
     filterState: FilterState,
@@ -72,52 +92,64 @@ fun AppCompatActivity.onFilterChangedThenUpdateFiltersText(
         }
     }.toMap()
     filtersTextView.text = filterState.toFilterGroups().highlight(colors = colors)
-    filterState.onChanged += {
+    filterState.filters.subscribe {
         filtersTextView.text = it.toFilterGroups().highlight(colors = colors)
     }
 }
 
-//fun AppCompatActivity.onClearAllThenClearFilters(
-//        filterState: FilterState,
-//        filtersClearAll: View
-//) {
-//    val viewModel = FilterClearViewModel()
-//
-//    viewModel.connectView(FilterClearViewImpl(filtersClearAll))
-//    viewModel.connectFilterState(filterState)
-//}
+fun AppCompatActivity.onClearAllThenClearFilters(
+    filterState: FilterState,
+    filtersClearAll: View,
+    connection: ConnectionHandler
+) {
+    val connector = FilterClearConnector(filterState)
+
+    connection += connector
+    connection += connector.connectView(FilterClearViewImpl(filtersClearAll))
+}
 
 fun AppCompatActivity.onErrorThenUpdateFiltersText(
-        searcher: SearcherSingleIndex,
-        filtersTextView: TextView
+    searcher: SearcherSingleIndex,
+    filtersTextView: TextView
 ) {
-    searcher.onErrorChanged += {
-        filtersTextView.text = it.localizedMessage
+    searcher.error.subscribe {
+        filtersTextView.text = it?.localizedMessage
     }
 }
 
-//fun AppCompatActivity.onResponseChangedThenUpdateNbHits(
-//        searcher: SearcherSingleIndex,
-//        nbHitsView: TextView
-//) {
-//    val viewModel = StatsViewModel()
-//    val view = StatsTextViewSpanned(nbHitsView)
-//    val presenter: StatsPresenter<SpannedString> = { response ->
-//        buildSpannedString {
-//            if (response != null) {
-//                bold { append(response.nbHits.toString()) }
-//                append(" ${getString(R.string.hits)}")
-//            }
-//        }
-//    }
-//
-//    viewModel.connectSearcher(searcher)
-//    viewModel.connectView(view, presenter)
-//}
+fun AppCompatActivity.onResponseChangedThenUpdateNbHits(
+    searcher: SearcherSingleIndex,
+    nbHitsView: TextView,
+    connection: ConnectionHandler
+) {
+    val view = StatsTextViewSpanned(nbHitsView)
+    val presenter: StatsPresenter<SpannedString> = { response ->
+        buildSpannedString {
+            if (response != null) {
+                bold { append(response.nbHits.toString()) }
+                append(" ${getString(R.string.hits)}")
+            }
+        }
+    }
+    val connector = StatsConnector(searcher)
+
+    connection += connector
+    connection += connector.connectView(view, presenter)
+}
+
+fun AppCompatActivity.onResetThenRestoreFilters(
+    reset: View,
+    filterState: FilterState,
+    filters: Map<FilterGroupID, Set<Filter>>
+) {
+    reset.setOnClickListener {
+        filterState.notify { set(filters) }
+    }
+}
 
 fun AppCompatActivity.configureTitle(
-        textView: TextView,
-        text: String
+    textView: TextView,
+    text: String
 ) {
     textView.let {
         it.text = text
@@ -134,8 +166,8 @@ fun AppCompatActivity.configureSearcher(searcher: SearcherForFacets) {
 }
 
 fun AppCompatActivity.configureRecyclerView(
-        recyclerView: RecyclerView,
-        adapter: RecyclerView.Adapter<*>
+    recyclerView: RecyclerView,
+    adapter: RecyclerView.Adapter<*>
 ) {
     recyclerView.let {
         it.visibility = View.VISIBLE
@@ -146,32 +178,22 @@ fun AppCompatActivity.configureRecyclerView(
     }
 }
 
-fun RecyclerView.autoScrollToStart(adapter: RecyclerView.Adapter<*>) {
-    adapter.registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
-        override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
-            if (positionStart == 0) {
-                scrollToPosition(0)
-            }
-        }
-    })
-}
-
 val Intent.indexName: IndexName get() = IndexName(extras!!.getString(KeyIndexName)!!)
 
-fun AppCompatActivity.configureSearchBox(
+fun <R> AppCompatActivity.configureSearchBox(
     searchView: SearchView,
-    searcher: Searcher
+    searcher: Searcher<R>,
+    connection: ConnectionHandler
 ) {
-    val searchBoxViewModel = SearchBoxViewModel()
-    val searchBoxView = SearchBoxViewAppCompat(searchView)
+    val connector = SearchBoxConnector(searcher)
 
-    searchBoxViewModel.connectView(searchBoxView)
-    searchBoxViewModel.connectSearcher(searcher)
+    connection += connector
+    connection += connector.connectView(SearchBoxViewAppCompat(searchView))
 }
 
 fun AppCompatActivity.configureSearchView(
-        searchView: SearchView,
-        queryHint: String
+    searchView: SearchView,
+    queryHint: String
 ) {
     searchView.also {
         val hintIcon = ContextCompat.getDrawable(this, R.drawable.ic_search_hint)!!
@@ -186,9 +208,9 @@ fun AppCompatActivity.configureSearchView(
 }
 
 fun SearchView.showQueryHintIcon(
-        showIconHint: Boolean,
-        hintIcon: Drawable,
-        hintText: String? = null
+    showIconHint: Boolean,
+    hintIcon: Drawable,
+    hintText: String? = null
 ) {
     queryHint = if (!showIconHint) {
         hintText
@@ -205,3 +227,27 @@ fun SearchView.showQueryHintIcon(
 }
 
 fun Context.dip(value: Int): Int = (value * resources.displayMetrics.density).toInt()
+
+public fun Set<FilterGroup<*>>.highlight(
+    converter: FilterGroupsConverter<Set<FilterGroup<*>>, String?> = FilterGroupsConverter.SQL.Unquoted,
+    colors: Map<String, Int> = mapOf(),
+    defaultColor: Int = Color.BLACK
+): SpannableStringBuilder {
+    return SpannableStringBuilder().also {
+        var begin = 0
+
+        forEachIndexed { index, group ->
+            val color = colors.getOrElse(group.name ?: "") { defaultColor }
+            val string = converter(setOf(group))
+
+            it.append(string)
+            it.setSpan(ForegroundColorSpan(color), begin, it.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            if (index < size - 1) {
+                begin = it.length
+                it.append(" AND ")
+                it.setSpan(StyleSpan(Typeface.BOLD), begin, it.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            begin = it.length
+        }
+    }
+}

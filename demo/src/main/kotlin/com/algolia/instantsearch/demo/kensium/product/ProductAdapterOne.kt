@@ -1,16 +1,20 @@
 package com.algolia.instantsearch.demo.kensium.product
 
 import android.view.ViewGroup
+import androidx.paging.PagedList
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.ListAdapter
 import com.algolia.instantsearch.core.hits.HitsView
 import com.algolia.instantsearch.demo.R
-import com.algolia.instantsearch.demo.inflate
+import com.algolia.instantsearch.demo.kensium.product.Product
+import com.algolia.instantsearch.demo.kensium.product.ProductViewHolder
+import com.algolia.instantsearch.helper.android.inflate
 
+class ProductAdapterOne :HitsView<Product>, PagedListAdapter<Product, ProductViewHolder>(ProductDiffUtil) {
 
-class ProductAdapter : ListAdapter<Product, ProductViewHolder>(ProductDiffUtil), HitsView<Product> {
-
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+        return ProductViewHolder(parent.inflate(R.layout.list_item_large))
+    }
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item = getItem(position)
@@ -18,9 +22,6 @@ class ProductAdapter : ListAdapter<Product, ProductViewHolder>(ProductDiffUtil),
         if (item != null) holder.bind(item)
     }
 
-    override fun setHits(hits: List<Product>) {
-        submitList(hits)
-    }
     object ProductDiffUtil : DiffUtil.ItemCallback<Product>() {
 
         override fun areItemsTheSame(
@@ -38,8 +39,7 @@ class ProductAdapter : ListAdapter<Product, ProductViewHolder>(ProductDiffUtil),
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-        return ProductViewHolder(parent.inflate(R.layout.list_item_large))
+    override fun setHits(hits: List<Product>) {
+        submitList(hits as PagedList<Product>)
     }
-
 }

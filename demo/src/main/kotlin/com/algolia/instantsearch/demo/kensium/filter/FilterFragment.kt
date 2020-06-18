@@ -84,16 +84,16 @@ class FilterFragment : Fragment() {
 
 
 
-        brandFilterList.let {
-            it.adapter = viewModel.adapterBrand
-            it.layoutManager = LinearLayoutManager(context)
-            it.itemAnimator = null
-        }
-        categoryFilterList.let {
-            it.adapter = viewModel.adapterCategoryLvl1
-            it.layoutManager = LinearLayoutManager(context)
-            it.itemAnimator = null
-        }
+//        brandFilterList.let {
+//            it.adapter = viewModel.adapterBrand
+//            it.layoutManager = LinearLayoutManager(context)
+//            it.itemAnimator = null
+//        }
+//        categoryFilterList.let {
+//            it.adapter = viewModel.adapterCategoryLvl1
+//            it.layoutManager = LinearLayoutManager(context)
+//            it.itemAnimator = null
+//        }
         priceFilterList.let {
             it.adapter = viewModel.adapterPrice
             it.layoutManager = LinearLayoutManager(context)
@@ -114,8 +114,8 @@ class FilterFragment : Fragment() {
             viewModel.cateCount.postValue(1)
         }
         buttonSubmit.setOnClickListener {
-            viewModel.products.value?.dataSource?.invalidate()
-            findNavController().popBackStack()
+//            viewModel.products.value?.dataSource?.invalidate()
+//            findNavController().popBackStack()
         }
     }
 }

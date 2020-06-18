@@ -1,5 +1,6 @@
 package com.algolia.instantsearch.demo.kensium.category
 
+import android.R.attr.button
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,13 +23,21 @@ class CategoryFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = (activity as KensiumActivity).viewModel
+//        textView?.setOnClickListener {
+//            val bundle = bundleOf("categoryLvl0" to "Shampoo")
+//            findNavController().navigate(
+//                R.id.action_fragmentCategory_to_subCategoryFragment,
+//                bundle
+//            )
+//        }
+
         viewModel?.adapterCategoryLvl0?.apply {
             onClick = { facet ->
                 val bundle = bundleOf("categoryLvl0" to "Shampoo")
-                findNavController().navigate(
-                    R.id.action_fragmentCategory_to_subCategoryFragment,
-                    bundle
-                )
+            findNavController().navigate(
+                R.id.action_fragmentCategory_to_subCategoryFragment,
+                bundle
+            )
             }
         }
 
