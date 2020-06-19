@@ -1,5 +1,6 @@
 package com.algolia.instantsearch.demo.kensium
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -7,20 +8,27 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.algolia.instantsearch.core.connection.ConnectionHandler
 import com.algolia.instantsearch.core.searchbox.SearchBoxViewModel
+import com.algolia.instantsearch.core.selectable.list.SelectionMode
+import com.algolia.instantsearch.demo.filter.facet.FacetListViewHolderImpl
 import com.algolia.instantsearch.demo.kensium.category.CategoryAdapter
 import com.algolia.instantsearch.demo.kensium.filter.FilterPriceAdapter
 import com.algolia.instantsearch.demo.kensium.product.Product
 import com.algolia.instantsearch.demo.kensium.product.ProductAdapter
 import com.algolia.instantsearch.demo.kensium.product.ProductAdapterOne
 import com.algolia.instantsearch.demo.kensium.subcategory.SubCategoryAdapter
+import com.algolia.instantsearch.helper.android.filter.facet.FacetListAdapter
 import com.algolia.instantsearch.helper.android.list.SearcherSingleIndexDataSource
 import com.algolia.instantsearch.helper.android.searchbox.SearchBoxConnectorPagedList
 import com.algolia.instantsearch.helper.attribute.AttributeMatchAndReplace
 import com.algolia.instantsearch.helper.filter.FilterPresenterImpl
 import com.algolia.instantsearch.helper.filter.facet.*
+import com.algolia.instantsearch.helper.filter.list.FilterListConnector
 import com.algolia.instantsearch.helper.filter.list.FilterListViewModel
 import com.algolia.instantsearch.helper.filter.list.connectFilterState
 import com.algolia.instantsearch.helper.filter.state.FilterState
+import com.algolia.instantsearch.helper.filter.state.groupAnd
+import com.algolia.instantsearch.helper.filter.state.groupOr
+import com.algolia.instantsearch.helper.hierarchical.HierarchicalConnector
 import com.algolia.instantsearch.helper.index.IndexPresenter
 import com.algolia.instantsearch.helper.loading.LoadingConnector
 import com.algolia.instantsearch.helper.searchbox.SearchBoxConnector
@@ -29,7 +37,9 @@ import com.algolia.instantsearch.helper.searchbox.connectSearcher
 import com.algolia.instantsearch.helper.searcher.SearcherForFacets
 import com.algolia.instantsearch.helper.searcher.SearcherSingleIndex
 import com.algolia.instantsearch.helper.searcher.addFacet
+import com.algolia.instantsearch.helper.searcher.connectFilterState
 import com.algolia.search.client.Index
+import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.NumericOperator
 import com.algolia.search.model.response.ResponseSearch
@@ -45,14 +55,14 @@ class KensiumViewModel : ViewModel() {
     val brandCount = MutableLiveData<Int>()
     val cateCount = MutableLiveData<Int>()
     val priceCount = MutableLiveData<Int>()
-    val connection = ConnectionHandler()
+    var connection = ConnectionHandler()
 //
     val searcherForFacets = SearcherForFacets(Kensium.index, Kensium.categoryLvl0)
     val searchForSubCatFacets = SearcherForFacets(Kensium.index, Kensium.categoryLvl0)
 
      val dataSourceFactory = SearcherSingleIndexDataSource.Factory(searcher) { it.deserialize(Product.serializer()) }
      val pagedListConfig = PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false).build()
-     val product = LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
+        val product:LiveData<PagedList<Product>> = LivePagedListBuilder(dataSourceFactory, pagedListConfig).build()
      val searchBox = SearchBoxConnectorPagedList(searcher, listOf(product))
 //    val searchBox = SearchBoxConnector(searcher, searchMode = SearchMode.AsYouType)
     val filterNumericPresenter = FilterPresenterImpl(AttributeMatchAndReplace(Kensium.price, "price"))
@@ -62,22 +72,70 @@ class KensiumViewModel : ViewModel() {
     val adapterProduct = ProductAdapter()
     val adapterProductOne = ProductAdapterOne()
 
-    //    val adapterBrand = FacetListAdapter()
-//    val adapterCategoryLvl1 = FacetListAdapter()
     val adapterPrice = FilterPriceAdapter(filterNumericPresenter)
+    private val brand = Attribute("brand")
+    private val categories = Attribute("categories.level0")
+    private val hierarchicalCategory = Attribute("categories")
+    private val hierarchicalCategoryLvl0 = Attribute("$hierarchicalCategory.level0")
+    private val hierarchicalCategoryLvl1 = Attribute("$hierarchicalCategory.level1")
+    private val hierarchicalAttributes = listOf(
+        hierarchicalCategoryLvl0,
+        hierarchicalCategoryLvl1
+    )
+    val separator = " /// "
+    private val price = Attribute("price.USD.default")
+    private val groupBrand = groupAnd(brand)
+    private val groupCategories = groupAnd(categories)
+     val groupPrice = groupAnd(price)
+    val hierarchical = HierarchicalConnector(
+        searcher,
+        hierarchicalCategory,
+        filterState,
+        hierarchicalAttributes,
+        separator)
 
-    /**
-     * Here you can define all the index you want. Each time a new index will be selected, the results will automatically change.
-     * This achieve the "SortBy" feature.
-     */
-//    val indexSegmentViewModel = IndexPresenterImpl(items = mapOf(
-//            0 to Kensium.index,
-//            1 to Kensium.indexPriceAsc,
-//            2 to Kensium.indexPriceDes,
-//            3 to Kensium.indexNewestFirst,
-//            4 to Kensium.indexNameAscName,
-//            5 to Kensium.indexNameDesName
-//    ))
+    private val filters = listOf(
+        Filter.Numeric(price, NumericOperator.Less, 5),
+        Filter.Numeric(price, 5..10),
+        Filter.Numeric(price, 10..25),
+        Filter.Numeric(price, 25..100),
+        Filter.Numeric(price, NumericOperator.Greater, 100)
+    )
+    private val filterList = FilterListConnector.Numeric(filters, filterState, groupID = groupPrice)
+
+    val brandList = FacetListConnector(
+        searcher = searcher,
+        filterState = filterState,
+        attribute = brand,
+        selectionMode = SelectionMode.Multiple,
+        persistentSelection = true
+    )
+     val categoryList = FacetListConnector(
+        searcher = searcher,
+        filterState = filterState,
+        attribute = categories,
+        selectionMode = SelectionMode.Single,
+        groupID = groupCategories
+
+    )
+
+    val priceList = FacetListConnector(
+        searcher = searcher,
+        filterState = filterState,
+        attribute = price ,
+        selectionMode = SelectionMode.Multiple
+    )
+     val brandPresenter = FacetListPresenterImpl(listOf(
+        FacetSortCriterion.CountDescending
+    ))
+     val brandAdapter = FacetListAdapter(FacetListViewHolderImpl.Factory)
+     val pricePresenter = FacetListPresenterImpl()
+     val priceAdapter = FacetListAdapter(FacetListViewHolderImpl.Factory)
+     val categoryPresenter = FacetListPresenterImpl(listOf(
+        FacetSortCriterion.IsRefined
+    ))
+     val categoryAdapter =FacetListAdapter(FacetListViewHolderImpl.Factory)
+
     val brandViewModel = FacetListViewModel()
     val categoryViewModel = FacetListViewModel()
     val priceViewModel = FilterListViewModel.Numeric()
@@ -121,6 +179,7 @@ class KensiumViewModel : ViewModel() {
 
     }
 
+
     private fun configureSearcherForFacets() {
 //        searcherForFacets.let {
 //            it.response?.let { response -> adapterCategoryLvl0.submitList(response.facets) }
@@ -150,32 +209,18 @@ class KensiumViewModel : ViewModel() {
 
 
     private fun configurePriceFilter() {
-        /**
-         * Add the price facet to access FacetStats later.
-         */
-        searcher.query.addFacet(Kensium.price)
-        priceViewModel.connectFilterState(filterState, Kensium.groupIDPrice)
+
+//            searcher.query.addFacet(Kensium.price)
+//        priceViewModel.connectFilterState(filterState, Kensium.groupIDPrice)
 //        priceViewModel.connectView(adapterPrice)
-//        searcher.onResponseChanged += { response ->
-//            /**
-//             * Here, use the facetStats to do dynamic computation of the price filters.
-//             */
-//
-//
-//
-//
-//
-//            if (response.hitsOrNull?.isNotEmpty()!!) {
-//
-//
-//
-//
-//
-//                val facetStatsPrice = response.facetStats[Kensium.price]
-//                if (filterState.getNumericFilters(Kensium.groupIDPrice).isEmpty()) {
-//                    isClear = true
-//                    setDropDown(facetStatsPrice?.min?.toDouble()!!, facetStatsPrice.max.toDouble())
-//                }
+        searcher.response.subscribe {
+            if (it == null || it.hitsOrNull.isNullOrEmpty()) {
+
+            } else {
+                val facetStatsPrice = it.facetStats[Kensium.price]
+                if (filterState.getNumericFilters(Kensium.groupIDPrice).isEmpty()) {
+                    setDropDown(facetStatsPrice?.min?.toDouble()!!, facetStatsPrice.max.toDouble())
+                }
 //
 //                if(filterState.getFacetFilters(Kensium.groupIDBrand).isNotEmpty()){
 //                    if (response.facetsOrNull!!.get(Attribute("brand"))?.size!! > 0) {
@@ -204,11 +249,11 @@ class KensiumViewModel : ViewModel() {
 //                    setDropDown(facetStatsPrice?.min?.toDouble()!!, facetStatsPrice.max.toDouble())
 //                }
 //            }
-//
-//
-//        }
+            }
+        }
     }
 
+    var priceFilterList : ArrayList<Filter.Numeric> ?= null
     private fun setDropDown(min: Double, max: Double) {
 
         val minValue: Double
@@ -266,15 +311,25 @@ class KensiumViewModel : ViewModel() {
         }
 
         val list = arrayListOf<Filter.Numeric>()
-        list.add(0, Filter.Numeric(Kensium.price, NumericOperator.Less, priceList[1].toDouble()))
-        for (item in 2 until priceList.size - 1) {
-            list.add(Filter.Numeric(Kensium.price, LongRange(priceList[item].split("..")[0].toLong()
-                    , priceList[item].split("..")[1].toLong())))
-        }
-        list.add(Filter.Numeric(Kensium.price, NumericOperator.Greater, priceList[priceList.size - 1].toDouble()))
+        Log.e("Price",""+priceList)
+//        list.add(0, Filter.Numeric(Kensium.price, NumericOperator.Less, priceList[1].toDouble()))
+//        for (item in 2 until priceList.size - 1) {
+//            list.add(Filter.Numeric(Kensium.price, LongRange(priceList[item].split("..")[0].toLong()
+//                    , priceList[item].split("..")[1].toLong())))
+//        }
+//        list.add(Filter.Numeric(Kensium.price, NumericOperator.Greater, priceList[priceList.size - 1].toDouble()))
 
 
 //        priceViewModel.items = list
+
+        priceFilterList = arrayListOf()
+            priceFilterList!!.add(0,Filter.Numeric(price, NumericOperator.Less, priceList[1].toDouble()))
+        for (item in 2 until priceList.size - 1) {
+            priceFilterList!!.add(Filter.Numeric(Kensium.price, LongRange(priceList[item].split("..")[0].toLong()
+                    , priceList[item].split("..")[1].toLong())))
+        }
+        priceFilterList!!.add(Filter.Numeric(Kensium.price, NumericOperator.Greater, priceList[priceList.size - 1].toDouble()))
+
 
 
     }

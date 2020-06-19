@@ -1,14 +1,19 @@
 package com.algolia.instantsearch.demo.kensium.product
 
 import android.os.Bundle
+import android.text.SpannedString
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TextView
+import androidx.core.text.bold
+import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.paging.PagedList
 import com.algolia.instantsearch.core.connection.ConnectionHandler
 import com.algolia.instantsearch.core.hits.connectHitsView
 import com.algolia.instantsearch.core.searcher.connectView
@@ -17,6 +22,7 @@ import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.demo.kensium.Kensium
 import com.algolia.instantsearch.demo.kensium.KensiumActivity
 import com.algolia.instantsearch.demo.kensium.KensiumViewModel
+import com.algolia.instantsearch.helper.android.filter.state.connectPagedList
 import com.algolia.instantsearch.helper.android.searchbox.connectView
 import com.algolia.instantsearch.helper.android.sortby.SortByViewAutocomplete
 import com.algolia.instantsearch.helper.filter.facet.FacetListConnector
@@ -28,9 +34,12 @@ import com.algolia.instantsearch.helper.filter.state.groupOr
 import com.algolia.instantsearch.helper.hierarchical.HierarchicalConnector
 import com.algolia.instantsearch.helper.hierarchical.HierarchicalPresenterImpl
 import com.algolia.instantsearch.helper.hierarchical.connectView
+import com.algolia.instantsearch.helper.searcher.SearcherSingleIndex
 import com.algolia.instantsearch.helper.searcher.connectFilterState
 import com.algolia.instantsearch.helper.sortby.SortByConnector
 import com.algolia.instantsearch.helper.sortby.connectView
+import com.algolia.instantsearch.helper.stats.StatsConnector
+import com.algolia.instantsearch.helper.stats.connectView
 import com.algolia.instantsearch.showcase.client
 import com.algolia.instantsearch.showcase.configureRecyclerView
 import com.algolia.instantsearch.showcase.onResponseChangedThenUpdateNbHits
@@ -38,6 +47,7 @@ import com.algolia.search.helper.deserialize
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.IndexName
 import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.response.ResponseSearch
 import kotlinx.android.synthetic.main.kensium_product.*
 
 
@@ -53,6 +63,7 @@ class ProductFragment : Fragment() {
         5 to Kensium.index5
     )
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = (activity as KensiumActivity).viewModel!!
@@ -65,13 +76,15 @@ class ProductFragment : Fragment() {
 //            val filter2 = Filter.Facet(Kensium.categoryLvl0,"Heated Styling Tools")
 
             viewModel.filterState.notify {
+                clear()
                 add(Kensium.groupIDCategoryLvl0,filter1)
             }
         }
 
 
-//        viewModel.product.observe(this, Observer {
-//            if(isVisible){
+
+        viewModel.product.observe(this, Observer {
+            if(isVisible){
 //                if(it.isEmpty()){
 //                    tvEmpty.visibility = View.VISIBLE
 //                    productList.visibility = View.GONE
@@ -80,10 +93,10 @@ class ProductFragment : Fragment() {
 //                    productList.visibility = View.VISIBLE
 //                }
 //                productList.smoothScrollToPosition(0)
-//            }
-//            Log.e("results",it.toString())
-//            viewModel.adapterProductOne.submitList(it)
-//        })
+            }
+            Log.e("results",it.toString())
+            viewModel.adapterProduct.submitList(it)
+        })
 
     }
 
@@ -92,18 +105,17 @@ class ProductFragment : Fragment() {
         return inflater.inflate(R.layout.kensium_product, container, false)
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        productList.let {
-            it.adapter = viewModel.adapterProductOne
-            it.itemAnimator = null
-        }
 
         val sortBy = SortByConnector(indexes, viewModel.searcher, selected = 0)
         val connection = ConnectionHandler(sortBy)
         val adapter = ArrayAdapter<String>(requireContext(), R.layout.menu_item)
         val autoView = SortByViewAutocomplete(autoCompleteTextView, adapter)
+        connection += viewModel.filterState.connectPagedList(viewModel.product)
+
+
         connection += viewModel.searcher.connectFilterState(viewModel.filterState)
 
         connection += sortBy.connectView(autoView) { index ->
@@ -117,14 +129,23 @@ class ProductFragment : Fragment() {
                 else -> index.indexName.raw
             }
         }
-        connection += viewModel.searcher.connectHitsView(viewModel.adapterProductOne) { response ->
+
+        connection += viewModel.searcher.connectHitsView(viewModel.adapterProduct) { response ->
             response.hits.deserialize(Product.serializer())
         }
+        productList.let {
+            it.adapter = viewModel.adapterProduct
+            it.itemAnimator = null
+        }
+
+
+
+//
 
         viewModel.searcher.searchAsync()
-
-
-
         button.setOnClickListener { findNavController().navigate(R.id.navigateToFragmentFilter) }
     }
+
+
+
 }

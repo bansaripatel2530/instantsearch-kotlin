@@ -106,5 +106,10 @@ class KensiumActivity : AppCompatActivity() {
 
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel?.searcher?.cancel()
+    }
+
 
 }

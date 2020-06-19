@@ -22,6 +22,8 @@ class ProductAdapterOne :HitsView<Product>, PagedListAdapter<Product, ProductVie
         if (item != null) holder.bind(item)
     }
 
+
+
     object ProductDiffUtil : DiffUtil.ItemCallback<Product>() {
 
         override fun areItemsTheSame(
@@ -41,5 +43,6 @@ class ProductAdapterOne :HitsView<Product>, PagedListAdapter<Product, ProductVie
 
     override fun setHits(hits: List<Product>) {
         submitList(hits as PagedList<Product>)
+        notifyDataSetChanged()
     }
 }
