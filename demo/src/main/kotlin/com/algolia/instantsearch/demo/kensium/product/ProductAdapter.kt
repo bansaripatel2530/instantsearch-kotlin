@@ -1,5 +1,6 @@
 package com.algolia.instantsearch.demo.kensium.product
 
+import android.util.Log
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,7 +15,6 @@ class ProductAdapter : ListAdapter<Product, ProductViewHolder>(ProductDiffUtil),
 
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val item = getItem(position)
-
         if (item != null) holder.bind(item)
     }
 

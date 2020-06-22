@@ -39,30 +39,26 @@ class FilterFragment : Fragment() {
     lateinit var viewModel: KensiumViewModel
     private  var connection : ConnectionHandler? = null
     val adapter = HierarchicalAdapter()
-    val viewNumeric = FilterListAdapter<Filter.Numeric>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProviders.of(requireActivity()).get(KensiumViewModel::class.java)
-        Log.e("Min",""+viewModel.priceAdapter.currentList)
-        val priceListOne = FilterListConnector.Numeric(
-            viewModel.priceFilterList!!
-            , viewModel.filterState, groupID = viewModel.groupPrice)
-
         connection = ConnectionHandler(
             viewModel.brandList,
-            priceListOne,
+            viewModel.priceListOne!!,
             viewModel.categoryList,
+            viewModel.priceListNewOne,
             viewModel.searcher.connectFilterState(viewModel.filterState)
         )
 
 
         connection!! += viewModel.brandList.connectView(viewModel.brandAdapter,viewModel.brandPresenter)
-        connection!! += priceListOne.connectView(viewNumeric)
-        connection!! += viewModel.categoryList.connectView(viewModel.categoryAdapter,viewModel.categoryPresenter)
+        connection!! += viewModel.priceListOne!!.connectView(viewModel.viewNumeric)
+        connection!! += viewModel.categoryList.connectView(viewModel.categoryAdapter)
 
 //        connection!! += viewModel.hierarchical.connectView(adapter, HierarchicalPresenterImpl(viewModel.separator))
 
+        viewModel.searcher.searchAsync()
     }
 
   private fun onClearAllThenClearFilters(
@@ -84,9 +80,7 @@ class FilterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onClearAllThenClearFilters(viewModel.filterState,filtersClearAll,connection!!)
-        viewModel.filterState.filters.subscribe {
-            Log.e("Tag",""+it)
-        }
+
 
 //        viewModel.brandCount.observe(this, Observer {
 //            Log.e("Brand",""+it)
@@ -151,7 +145,7 @@ class FilterFragment : Fragment() {
             it.itemAnimator = null
         }
         priceFilterList.let {
-            it.adapter = viewNumeric
+            it.adapter = viewModel.viewNumeric
             it.layoutManager = LinearLayoutManager(context)
             it.itemAnimator = null
         }

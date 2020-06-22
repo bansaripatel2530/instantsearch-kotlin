@@ -12,8 +12,10 @@ import androidx.core.text.bold
 import androidx.core.text.buildSpannedString
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.algolia.instantsearch.core.connection.ConnectionHandler
 import com.algolia.instantsearch.core.hits.connectHitsView
 import com.algolia.instantsearch.core.searcher.connectView
@@ -53,7 +55,9 @@ import kotlinx.android.synthetic.main.kensium_product.*
 
 class ProductFragment : Fragment() {
 
-    lateinit var viewModel: KensiumViewModel
+    var viewModel: KensiumViewModel ? = null
+    private  var connection : ConnectionHandler? = null
+
     private val indexes = mapOf(
         0 to Kensium.index,
         1 to Kensium.index1,
@@ -72,31 +76,15 @@ class ProductFragment : Fragment() {
 //            val filter = Filter.Facet(Kensium.categoryLvl0, category)
 //            val filter1 = Filter.Facet(Kensium.categoryLvl0,category)
 //            val filter1 = Filter.Facet(Kensium.categoryLvl2,"Hair /// Shampoo & Conditioner /// Shampoo")
-            val filter1 = Filter.Facet(Kensium.categoryLvl0,"Heated Styling Tools")
-//            val filter2 = Filter.Facet(Kensium.categoryLvl0,"Heated Styling Tools")
 
-            viewModel.filterState.notify {
-                clear()
-                add(Kensium.groupIDCategoryLvl0,filter1)
-            }
         }
 
+//        viewModel!!.product.observe(activity!!, Observer {
+//            Log.e("results",it.toString())
+//            viewModel!!.adapterProduct.submitList(it)
+//        })
 
 
-        viewModel.product.observe(this, Observer {
-            if(isVisible){
-//                if(it.isEmpty()){
-//                    tvEmpty.visibility = View.VISIBLE
-//                    productList.visibility = View.GONE
-//                }else{
-//                    tvEmpty.visibility = View.GONE
-//                    productList.visibility = View.VISIBLE
-//                }
-//                productList.smoothScrollToPosition(0)
-            }
-            Log.e("results",it.toString())
-            viewModel.adapterProduct.submitList(it)
-        })
 
     }
 
@@ -109,16 +97,19 @@ class ProductFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val sortBy = SortByConnector(indexes, viewModel.searcher, selected = 0)
-        val connection = ConnectionHandler(sortBy)
+        val sortBy = SortByConnector(indexes, viewModel!!.searcher, selected = 0)
+        connection = ConnectionHandler(sortBy)
         val adapter = ArrayAdapter<String>(requireContext(), R.layout.menu_item)
         val autoView = SortByViewAutocomplete(autoCompleteTextView, adapter)
-        connection += viewModel.filterState.connectPagedList(viewModel.product)
+        connection!! += viewModel!!.filterState.connectPagedList(viewModel!!.product)
+        productList.let {
+            it.adapter = viewModel!!.adapterProduct
+            it.itemAnimator = null
+        }
 
+        connection!! += viewModel!!.searcher.connectFilterState(viewModel!!.filterState)
 
-        connection += viewModel.searcher.connectFilterState(viewModel.filterState)
-
-        connection += sortBy.connectView(autoView) { index ->
+        connection!! += sortBy.connectView(autoView) { index ->
             when (index) {
                 Kensium.index -> "Relevance"
                 Kensium.index1 -> "Lowest Price"
@@ -130,22 +121,15 @@ class ProductFragment : Fragment() {
             }
         }
 
-        connection += viewModel.searcher.connectHitsView(viewModel.adapterProduct) { response ->
-            response.hits.deserialize(Product.serializer())
-        }
-        productList.let {
-            it.adapter = viewModel.adapterProduct
-            it.itemAnimator = null
+
+
+        connection!! += viewModel!!.searcher.connectHitsView(viewModel!!.adapterProduct) { response ->
+             response.hits.deserialize(Product.serializer());
         }
 
 
-
-//
-
-        viewModel.searcher.searchAsync()
+        viewModel!!.searcher.searchAsync()
         button.setOnClickListener { findNavController().navigate(R.id.navigateToFragmentFilter) }
     }
-
-
 
 }

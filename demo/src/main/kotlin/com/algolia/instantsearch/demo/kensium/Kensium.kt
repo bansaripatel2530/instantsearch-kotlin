@@ -19,7 +19,7 @@ object Kensium  {
     val categoryLvl2 = Attribute("categories.level2")
 
     //comment kensium
-    val groupIDCategoryLvl0 = FilterGroupID(categoryLvl0,FilterOperator.And)
+    val groupIDCategoryLvl0 = FilterGroupID(categoryLvl0,FilterOperator.Or)
     val groupIDCategoryLvl1 = FilterGroupID(categoryLvl1,FilterOperator.Or)
     val groupIDCategoryLvl2 = FilterGroupID(categoryLvl2,FilterOperator.Or)
 

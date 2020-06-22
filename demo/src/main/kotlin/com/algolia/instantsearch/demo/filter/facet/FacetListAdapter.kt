@@ -7,39 +7,54 @@ import androidx.recyclerview.widget.ListAdapter
 import com.algolia.instantsearch.core.Callback
 import com.algolia.instantsearch.core.selectable.list.SelectableItem
 import com.algolia.instantsearch.demo.R
+import com.algolia.instantsearch.helper.android.filter.facet.FacetListViewHolder
 import com.algolia.instantsearch.helper.android.inflate
 import com.algolia.instantsearch.helper.filter.FilterPresenterImpl
+import com.algolia.instantsearch.helper.filter.facet.FacetListItem
+import com.algolia.instantsearch.helper.filter.facet.FacetListView
 import com.algolia.instantsearch.helper.filter.list.FilterListView
 import com.algolia.search.model.filter.Filter
+import com.algolia.search.model.search.Facet
 
 
-class FacetListAdapter<T: Filter> :
-    ListAdapter<SelectableItem<T>, FacetListViewHolder>(DiffUtilItem()),
-    FilterListView<T> {
+public class FacetListAdapter(
+    private val factory: FacetListViewHolder.Factory
+) : ListAdapter<FacetListItem, FacetListViewHolder>(diffUtil),
+    FacetListView {
 
-    override var onSelection: Callback<T>? = null
+    override var onSelection: Callback<Facet>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FacetListViewHolder {
-        return FacetListViewHolder(parent.inflate(R.layout.list_item_selectable))
+        return factory.createViewHolder(parent)
     }
 
     override fun onBindViewHolder(holder: FacetListViewHolder, position: Int) {
-        val (filter, selected) = getItem(position)
-        holder.bind(FilterPresenterImpl()(filter), selected, View.OnClickListener { onSelection?.invoke(filter) })
+        val (facet, selected) = getItem(position)
+
+        holder.bind(facet, selected, View.OnClickListener { onSelection?.invoke(facet) })
     }
 
-    override fun setItems(items: List<SelectableItem<T>>) {
+    override fun setItems(items: List<SelectableItem<Facet>>) {
         submitList(items)
     }
 
-    private class DiffUtilItem<T: Filter>: DiffUtil.ItemCallback<SelectableItem<T>>() {
+    companion object {
 
-        override fun areItemsTheSame(oldItem: SelectableItem<T>, newItem: SelectableItem<T>): Boolean {
-            return oldItem::class == newItem::class
-        }
+        private val diffUtil = object : DiffUtil.ItemCallback<FacetListItem>() {
 
-        override fun areContentsTheSame(oldItem: SelectableItem<T>, newItem: SelectableItem<T>): Boolean {
-            return oldItem == newItem
+            override fun areItemsTheSame(
+                oldItem: FacetListItem,
+                newItem: FacetListItem
+            ): Boolean {
+                return oldItem::class == newItem::class
+            }
+
+            override fun areContentsTheSame(
+                oldItem: FacetListItem,
+                newItem: FacetListItem
+            ): Boolean {
+                return oldItem == newItem
+            }
         }
     }
 }

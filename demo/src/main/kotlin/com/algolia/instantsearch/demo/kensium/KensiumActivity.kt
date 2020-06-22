@@ -1,10 +1,12 @@
 package com.algolia.instantsearch.demo.kensium
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.algolia.instantsearch.core.connection.ConnectionHandler
@@ -35,8 +37,10 @@ class KensiumActivity : AppCompatActivity() {
         val searchBoxView = SearchBoxViewAppCompat(searchView!!)
         configureSearchView(searchView, getString(R.string.search_movies))
         viewModel!!.connection += viewModel!!.searchBox.connectView(searchBoxView)
-        viewModel!!.searchBoxViewModel.connectView(searchBoxView)
+//        viewModel!!.searchBoxViewModel?.connectView(searchBoxView)
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+
+
 
 //        searchView?.setOnQueryTextFocusChangeListener { v, hasFocus ->
 //            if (hasFocus) {

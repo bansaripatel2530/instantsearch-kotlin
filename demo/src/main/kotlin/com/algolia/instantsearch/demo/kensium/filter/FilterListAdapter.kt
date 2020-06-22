@@ -1,5 +1,6 @@
 package com.algolia.instantsearch.demo.kensium.filter
 
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -8,7 +9,6 @@ import com.algolia.instantsearch.core.Callback
 import com.algolia.instantsearch.core.selectable.list.SelectableItem
 import com.algolia.instantsearch.demo.R
 import com.algolia.instantsearch.helper.android.inflate
-import com.algolia.instantsearch.helper.filter.FilterPresenterImpl
 import com.algolia.instantsearch.helper.filter.list.FilterListView
 import com.algolia.search.model.filter.Filter
 
@@ -25,11 +25,11 @@ class FilterListAdapter<T: Filter> :
 
     override fun onBindViewHolder(holder: FilterListViewHolder, position: Int) {
         val (filter, selected) = getItem(position)
-
         holder.bind(FilterPresenterImpl()(filter), selected, View.OnClickListener { onSelection?.invoke(filter) })
     }
 
     override fun setItems(items: List<SelectableItem<T>>) {
+        Log.e("item",""+items)
         submitList(items)
     }
 
@@ -40,7 +40,7 @@ class FilterListAdapter<T: Filter> :
         }
 
         override fun areContentsTheSame(oldItem: SelectableItem<T>, newItem: SelectableItem<T>): Boolean {
-            return oldItem == newItem
+             return oldItem == newItem
         }
     }
 }
