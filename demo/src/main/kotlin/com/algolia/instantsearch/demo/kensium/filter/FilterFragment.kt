@@ -45,7 +45,7 @@ class FilterFragment : Fragment() {
         viewModel = ViewModelProviders.of(requireActivity()).get(KensiumViewModel::class.java)
         connection = ConnectionHandler(
             viewModel.brandList,
-            viewModel.priceListOne!!,
+            viewModel.priceListOne,
             viewModel.categoryList,
             viewModel.priceListNewOne,
             viewModel.searcher.connectFilterState(viewModel.filterState)
@@ -53,8 +53,8 @@ class FilterFragment : Fragment() {
 
 
         connection!! += viewModel.brandList.connectView(viewModel.brandAdapter,viewModel.brandPresenter)
-        connection!! += viewModel.priceListOne!!.connectView(viewModel.viewNumeric)
-        connection!! += viewModel.categoryList.connectView(viewModel.categoryAdapter)
+        connection!! += viewModel.priceListOne.connectView(viewModel.viewNumeric)
+        connection!! += viewModel.categoryList.connectView(viewModel.categoryAdapter,viewModel.categoryPresenter)
 
 //        connection!! += viewModel.hierarchical.connectView(adapter, HierarchicalPresenterImpl(viewModel.separator))
 
@@ -80,22 +80,46 @@ class FilterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onClearAllThenClearFilters(viewModel.filterState,filtersClearAll,connection!!)
-
-
-//        viewModel.brandCount.observe(this, Observer {
-//            Log.e("Brand",""+it)
-//            if(isVisible){
-//                if(it == -1){
-//                    tvEmptyBrand.visibility = View.VISIBLE
-//                    brandFilterList.visibility = View.INVISIBLE
-//                }else{
-//                    tvEmptyBrand.visibility = View.GONE
-//                    brandFilterList.visibility = View.VISIBLE
+//       if( viewModel.brandAdapter.currentList.size == 0){
+//           tvEmptyBrand.visibility = View.VISIBLE
+//           brandFilterList.visibility = View.GONE
 //
-//                }
-//            }
-//
-//        })
+//       }else{
+//           tvEmptyBrand.visibility = View.GONE
+//           brandFilterList.visibility = View.VISIBLE
+//       }
+
+        viewModel.brandCount.observe(this, Observer {
+            Log.e("Brand",""+it)
+            if(isVisible){
+                if(it == -1){
+                    tvEmptyBrand.visibility = View.VISIBLE
+                    brandFilterList.visibility = View.INVISIBLE
+                }else if (it == 10){
+                    Log.e("SIZE",""+viewModel.brandAdapter.itemCount)
+                }else{
+                    tvEmptyBrand.visibility = View.GONE
+                    brandFilterList.visibility = View.VISIBLE
+
+                }
+            }
+
+        })
+
+        viewModel.cateCount.observe(this, Observer {
+            Log.e("Brand",""+it)
+            if(isVisible){
+                if(it == -1){
+                    tvEmptyCat.visibility = View.VISIBLE
+                    categoryFilterList.visibility = View.INVISIBLE
+                }else{
+                    tvEmptyCat.visibility = View.GONE
+                    categoryFilterList.visibility = View.VISIBLE
+
+                }
+            }
+
+        })
 //
 //        viewModel.cateCount.observe(this, Observer {
 //            if(isVisible){

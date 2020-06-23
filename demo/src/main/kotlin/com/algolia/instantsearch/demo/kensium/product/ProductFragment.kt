@@ -79,6 +79,18 @@ class ProductFragment : Fragment() {
 
         }
 
+        viewModel!!.isNoDataFound.observe(activity!!, Observer {
+            if(isVisible){
+                if (it){
+                    tvEmpty.visibility = View.VISIBLE
+                    productList.visibility = View.GONE
+                }else{
+                    tvEmpty.visibility = View.GONE
+                    productList.visibility = View.VISIBLE
+                }
+            }
+
+        })
 //        viewModel!!.product.observe(activity!!, Observer {
 //            Log.e("results",it.toString())
 //            viewModel!!.adapterProduct.submitList(it)

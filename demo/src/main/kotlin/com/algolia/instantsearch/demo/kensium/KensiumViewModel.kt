@@ -8,7 +8,6 @@ import androidx.paging.LivePagedListBuilder
 import androidx.paging.PagedList
 import com.algolia.instantsearch.core.connection.ConnectionHandler
 import com.algolia.instantsearch.core.searchbox.SearchBoxViewModel
-import com.algolia.instantsearch.core.selectable.list.SelectableItem
 import com.algolia.instantsearch.core.selectable.list.SelectionMode
 import com.algolia.instantsearch.demo.filter.facet.CategoryListVIewHolderImpl
 import com.algolia.instantsearch.demo.filter.facet.FacetListViewHolderImpl
@@ -21,32 +20,24 @@ import com.algolia.instantsearch.demo.kensium.product.ProductAdapterOne
 import com.algolia.instantsearch.demo.kensium.subcategory.SubCategoryAdapter
 import com.algolia.instantsearch.helper.android.filter.facet.FacetListAdapter
 import com.algolia.instantsearch.helper.android.list.SearcherSingleIndexDataSource
-import com.algolia.instantsearch.helper.android.searchbox.SearchBoxConnectorPagedList
 import com.algolia.instantsearch.helper.attribute.AttributeMatchAndReplace
 import com.algolia.instantsearch.helper.filter.FilterPresenterImpl
-import com.algolia.instantsearch.helper.filter.facet.*
+import com.algolia.instantsearch.helper.filter.facet.FacetListConnector
+import com.algolia.instantsearch.helper.filter.facet.FacetListPresenterImpl
+import com.algolia.instantsearch.helper.filter.facet.FacetSortCriterion
 import com.algolia.instantsearch.helper.filter.list.FilterListConnector
-import com.algolia.instantsearch.helper.filter.list.FilterListViewModel
-import com.algolia.instantsearch.helper.filter.list.connectFilterState
 import com.algolia.instantsearch.helper.filter.state.FilterState
 import com.algolia.instantsearch.helper.filter.state.groupAnd
-import com.algolia.instantsearch.helper.filter.state.groupOr
 import com.algolia.instantsearch.helper.hierarchical.HierarchicalConnector
-import com.algolia.instantsearch.helper.index.IndexPresenter
-import com.algolia.instantsearch.helper.loading.LoadingConnector
 import com.algolia.instantsearch.helper.searchbox.SearchBoxConnector
 import com.algolia.instantsearch.helper.searchbox.SearchMode
-import com.algolia.instantsearch.helper.searchbox.connectSearcher
 import com.algolia.instantsearch.helper.searcher.SearcherForFacets
 import com.algolia.instantsearch.helper.searcher.SearcherSingleIndex
-import com.algolia.instantsearch.helper.searcher.addFacet
-import com.algolia.instantsearch.helper.searcher.connectFilterState
-import com.algolia.search.client.Index
 import com.algolia.search.helper.deserialize
 import com.algolia.search.model.Attribute
 import com.algolia.search.model.filter.Filter
 import com.algolia.search.model.filter.NumericOperator
-import com.algolia.search.model.response.ResponseSearch
+import java.util.logging.Handler
 
 /**
  * This class will be shared with all fragments from the same activity.
@@ -59,6 +50,7 @@ class KensiumViewModel : ViewModel() {
     val brandCount = MutableLiveData<Int>()
     val cateCount = MutableLiveData<Int>()
     val priceCount = MutableLiveData<Int>()
+    val isNoDataFound = MutableLiveData<Boolean>()
 //
     val searcherForFacets = SearcherForFacets(Kensium.index, Kensium.categoryLvl0)
     val searchForSubCatFacets = SearcherForFacets(Kensium.index, Kensium.categoryLvl0)
@@ -88,20 +80,15 @@ class KensiumViewModel : ViewModel() {
     private val hierarchicalCategoryLvl0 = Attribute("$hierarchicalCategory.level0")
     private val hierarchicalCategoryLvl1 = Attribute("$hierarchicalCategory.level1")
     private val hierarchicalAttributes = listOf(
-        hierarchicalCategoryLvl0
-//        hierarchicalCategoryLvl1
+        hierarchicalCategoryLvl0,
+        Kensium.categoryLvl00
     )
     val separator = " /// "
     private val price = Attribute("price.USD.default")
+
     private val groupBrand = groupAnd(brand)
     private val groupCategories = groupAnd(categories)
      val groupPrice = groupAnd(price)
-    val hierarchical = HierarchicalConnector(
-        searcher,
-        hierarchicalCategory,
-        filterState,
-        hierarchicalAttributes,
-        separator)
 
 
     val brandList = FacetListConnector(
@@ -121,10 +108,23 @@ class KensiumViewModel : ViewModel() {
         searcher = searcher,
         filterState = filterState,
         attribute = categories,
-        selectionMode = SelectionMode.Single,
-        groupID = groupCategories
+        selectionMode = SelectionMode.Single
 
     )
+    val categoriesList = FacetListConnector(
+        searcher = searcher,
+        filterState = filterState,
+        attribute = Kensium.categoryLvl00,
+        selectionMode = SelectionMode.Single
+
+    )
+    val hierarchical = HierarchicalConnector(
+        searcher,
+        hierarchicalCategory,
+        filterState,
+        hierarchicalAttributes,
+        separator)
+
     var priceFilterList : ArrayList<Filter.Numeric> = arrayListOf()
         var priceListOne = FilterListConnector.Numeric(priceFilterList!!,
     filterState, groupID = groupPrice)
@@ -132,13 +132,13 @@ class KensiumViewModel : ViewModel() {
 
     val brandPresenter = FacetListPresenterImpl(listOf(
         FacetSortCriterion.CountDescending
-    ))
+    ),limit = 1000000)
     val viewNumeric = FilterListAdapter<Filter.Numeric>()
     val brandAdapter = FacetListAdapter(FacetListViewHolderImpl.Factory)
      val priceAdapter = FacetListAdapter(FacetListViewHolderImpl.Factory)
      val categoryPresenter = FacetListPresenterImpl(listOf(
         FacetSortCriterion.IsRefined
-    ))
+    ),limit = 100000)
      val categoryAdapter = FacetListAdapter(CategoryListVIewHolderImpl.Factory)
 
 
@@ -185,9 +185,30 @@ class KensiumViewModel : ViewModel() {
 
         searcher.response.subscribe {
             if (it == null || it.hitsOrNull.isNullOrEmpty()) {
+                isNoDataFound.postValue(true)
+//                Log.e("FIL",""+filterState.getFilters(Kensium.groupIDCategoryLvl0))
+//                if(filterState.getFilters(Kensium.groupIDBrand).isEmpty()){
+//                 brandCount.postValue(-1)
+//                }
+//                if(filterState.getFilters(Kensium.groupIDCategoryLvl0).isEmpty()){
+//                    cateCount.postValue(-1)
+//                }
 
             } else {
-                Log.e("IT",""+it.facets[Kensium.price])
+//                if(brandAdapter.currentList.size > 0){
+//                    brandCount.postValue(1)
+//                }
+//                if(categoryAdapter.currentList.size > 0){
+//                    cateCount.postValue(1)
+//                }
+//
+//                if(viewNumeric.currentList.size > 0){
+//                    priceCount.postValue(1)
+//                }
+
+                isNoDataFound.postValue(false)
+
+                Log.e("IT",""+it.facets[Kensium.categoryLvl1])
                 val facetStatsPrice = it.facetStats[Kensium.price]
 
                 if (filterState.getNumericFilters(Kensium.groupIDPrice).isEmpty()) {
@@ -196,21 +217,21 @@ class KensiumViewModel : ViewModel() {
                 }
                 adapterProduct.submitList(it.hits.deserialize(Product.serializer()))
 
-//                if(filterState.getFacetFilters(Kensium.groupIDBrand).isNotEmpty()){
-//                    if (response.facetsOrNull!!.get(Attribute("brand"))?.size!! > 0) {
-//                        brandCount.postValue(-1)
-//                    }else{
-//                        brandCount.postValue(1)
-//                    }
+
+//                if (it!!.facetsOrNull!!.get(Attribute("brand"))?.size!! > 0) {
+//                    brandCount.postValue(-1)
+//                }else{
+//                    brandCount.postValue(1)
 //                }
+
 //
-//                if(filterState.getFacetFilters(Kensium.groupIDCategoryLvl1).isNotEmpty()){
-//                    if (response.facetsOrNull!!.get(Attribute("categories.level1"))?.size!! > 0) {
-//                        cateCount.postValue(-1)
-//                    }else{
-//                        cateCount.postValue(1)
-//                    }
-//                }
+                if(filterState.getFacetFilters(Kensium.groupIDCategoryLvl1).isNotEmpty()){
+                    if (it.facetsOrNull!!.get(Attribute("categories.level1"))?.size!! > 0) {
+                        cateCount.postValue(-1)
+                    }else{
+                        cateCount.postValue(1)
+                    }
+                }
 //
 //                if (filterState.getFacetFilters(Kensium.groupIDBrand).isNotEmpty()
 //                        || filterState.getFacetFilters(Kensium.groupIDCategoryLvl1).isNotEmpty()) {

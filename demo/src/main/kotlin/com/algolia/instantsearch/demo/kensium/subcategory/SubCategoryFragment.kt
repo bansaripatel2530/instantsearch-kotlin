@@ -36,7 +36,7 @@ class SubCategoryFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         btnShampoo.setOnClickListener {
             val bundle = bundleOf("categoryLvl0" to "Blades")
-            val filter1 = Filter.Facet(Kensium.categoryLvl0,"Heated Styling Tools")
+            val filter1 = Filter.Facet(Kensium.categoryLvl0,"Spa Tools")
 //            val filter2 = Filter.Facet(Kensium.categoryLvl0,"Heated Styling Tools")
 
             viewModel!!.filterState.notify {
